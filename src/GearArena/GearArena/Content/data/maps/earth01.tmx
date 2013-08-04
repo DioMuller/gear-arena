@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="160" height="100" tilewidth="4" tileheight="4">
+ <tileset firstgid="1" source="../tilesets/earth.tsx"/>
+ <layer name="Base Layer" width="160" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1dEJwCAMRVH70/1H7gQSpZZEew7cAXwEbA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC4g1gr2vvU3XvvvIJG9/rTlm9Ee/d2r2zkBkbf/UUrbviUW99hw9kyb6ta1W81ex/VKeNWs9+sPfNXSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSfk9+qoeVA==
+  </data>
+ </layer>
+ <layer name="Water Layer" width="160" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7BC/Xuuih2DBJIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3Kqqqqqqqqqqqqr67gBZNx4B
+  </data>
+ </layer>
+</map>
