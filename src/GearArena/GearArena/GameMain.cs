@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using MonoGameLib.Tiled;
+using MonoGameLib.Core;
 #endregion
 
 namespace GearArena
@@ -18,6 +20,8 @@ namespace GearArena
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Map _map;
 
         public GameMain()
             : base()
@@ -47,7 +51,9 @@ namespace GearArena
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            GameContent.Initialize(Content); 
 
+            _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
             // TODO: use this.Content to load your game content here
         }
 
@@ -83,7 +89,9 @@ namespace GearArena
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone, null, Matrix.CreateScale(1.25f));
+            _map.Draw(gameTime, spriteBatch, Vector2.Zero);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
