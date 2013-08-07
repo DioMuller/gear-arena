@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using MonoGameLib.Tiled;
 using MonoGameLib.Core;
+using GearArena.Entities;
 #endregion
 
 namespace GearArena
@@ -18,19 +19,20 @@ namespace GearArena
     /// </summary>
     public class GameMain : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
 
-        Map _map;
+        private Map _map;
+        private Player _player;
 
         public GameMain()
             : base()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
 
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = true;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.IsFullScreen = true;
 
             Content.RootDirectory = "Content";
         }
@@ -55,11 +57,13 @@ namespace GearArena
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
             GameContent.Initialize(Content); 
 
             _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
-            // TODO: use this.Content to load your game content here
+            _player = new Player(){ Position = new Vector2(100f, 100f) };
+
+            _player.CheckCollision += new CheckCollisionDelegate( () => { return _map.Collides(_player.CollisionRect); } );
         }
 
         /// <summary>
@@ -81,7 +85,7 @@ namespace GearArena
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            _player.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -94,9 +98,10 @@ namespace GearArena
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone, null, Matrix.CreateScale(2.5f));
-            _map.Draw(gameTime, spriteBatch, Vector2.Zero);
-            spriteBatch.End();
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone, null, Matrix.CreateScale(2f));
+            _map.Draw(gameTime, _spriteBatch, Vector2.Zero);
+            _player.Draw(gameTime, _spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

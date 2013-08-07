@@ -45,6 +45,14 @@ namespace GearArena.Behaviors
         public bool Rotate { get; set; }
         #endregion Properties
 
+        #region Constructors
+        public SolidBodyBehavior(Entity parent) : base(parent)
+        {
+            Forces = new Stack<Vector2>();
+            ConstantForces = new Dictionary<string,Vector2>();
+        }
+        #endregion Constructors
+
         #region Methods
         /// <summary>
         /// Updates the Rigid Body entity.
@@ -53,7 +61,7 @@ namespace GearArena.Behaviors
         public override void Update(GameTime gameTime)
         {
             Vector2 forces = Vector2.Zero;
-            float secs = (float)gameTime.ElapsedGameTime.TotalSeconds / 1000.0f; 
+            float secs = (float)gameTime.ElapsedGameTime.TotalSeconds; 
 
             #region Calculate Forces
             //Constant forces
@@ -70,7 +78,7 @@ namespace GearArena.Behaviors
             #endregion Calculate Forces
 
             Vector2 acceleration = (forces / Mass) + Gravity;
-            Vector2 accelSecs = acceleration / secs;
+            Vector2 accelSecs = acceleration * secs;
 
             Entity.Position += (Momentum + accelSecs/2) * secs;
             Momentum += accelSecs;
