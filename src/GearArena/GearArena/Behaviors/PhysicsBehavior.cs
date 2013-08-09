@@ -11,7 +11,7 @@ namespace GearArena.Behaviors
     /// <summary>
     /// Solid body physics behavior.
     /// </summary>
-    class SolidBodyBehavior : Behavior
+    class PhysicsBehavior : Behavior
     {
         #region Properties
         /// <summary>
@@ -46,7 +46,7 @@ namespace GearArena.Behaviors
         #endregion Properties
 
         #region Constructors
-        public SolidBodyBehavior(Entity parent) : base(parent)
+        public PhysicsBehavior(Entity parent) : base(parent)
         {
             Forces = new Stack<Vector2>();
             ConstantForces = new Dictionary<string,Vector2>();

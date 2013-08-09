@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using MonoGameLib.Tiled;
 using MonoGameLib.Core;
 using GearArena.Entities;
+using GearArena.Behaviors;
 #endregion
 
 namespace GearArena
@@ -66,7 +67,8 @@ namespace GearArena
             _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
             _player = new Player(){ Position = new Vector2(100f, 100f) };
 
-            _player.CheckCollision += new CheckCollisionDelegate( () => { return _map.Collides(_player.CollisionRect); } );
+            CollidableBehavior collision = _player.GetBehavior<CollidableBehavior>();
+            collision.CheckCollision += new CheckCollisionDelegate(() => { return _map.Collides(collision.CollisionRect); });
         }
 
         /// <summary>

@@ -36,8 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Behaviors\ControllableBehavior.cs" />
-    <Compile Include="Behaviors\SolidBodyBehavior.cs" />
-    <Compile Include="Entities\CollidibleEntity.cs" />
+    <Compile Include="Behaviors\PhysicsBehavior.cs" />
+    <Compile Include="Behaviors\CollidibleBehavior.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Program.cs" />
@@ -54,24 +54,6 @@
   <ItemGroup>
     <Content Include="C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\WindowsGL\SDL.dll">
       <Link>SDL.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Cold Funk.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Exhilarate.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Neolith.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Summon the Rawk.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Take the Lead.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Wah Game Loop.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\sprites\mecha.png">
@@ -106,6 +88,9 @@
     <Content Include="Content\data\tilesets\earth.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\audio\bgm\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

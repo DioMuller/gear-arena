@@ -10,13 +10,14 @@ using MonoGameLib.Core.Sprites;
 
 namespace GearArena.Entities
 {
-    public class Player : CollidableEntity
+    public class Player : Entity
     {
         #region Constructor
         public Player() : base()
         {
-            Behaviors.Add(new SolidBodyBehavior(this) { IsActive = true, Mass = 100, Rotate = false, Gravity = new Vector2(0f, 9.8f) } );
-            Behaviors.Add(new ControllableBehavior(this, new GamepadInput(PlayerIndex.One)));
+            Behaviors.Add(new PhysicsBehavior(this) { IsActive = true, Mass = 100, Rotate = false, Gravity = new Vector2(0f, 9.8f) } );
+            Behaviors.Add(new ControllableBehavior(this, new KeyboardInput()));
+            Behaviors.Add(new CollidableBehavior(this));
 
             Sprite = new Sprite("images/sprites/mecha.png", new Point(32, 32), 100);
 

@@ -24,12 +24,12 @@ namespace GearArena.Behaviors
 
         #region Methods
         /// <summary>
-        /// Updates the Rigid Body entity.
+        /// Updates the Controllable entity.
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            Entity.GetBehavior<SolidBodyBehavior>().ConstantForces["Accelerator"] = _input.LeftDirectional * 100f;
+            Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = _input.LeftDirectional * 1000f;
         }
         #endregion Methods
     }
