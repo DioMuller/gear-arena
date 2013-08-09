@@ -90,7 +90,7 @@ namespace GearArena
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            //SoundManager.PlayBGM("Cold Funk");
+            SoundManager.PlayBGM("Neolith");
             _player.Update(gameTime);
 
             base.Update(gameTime);

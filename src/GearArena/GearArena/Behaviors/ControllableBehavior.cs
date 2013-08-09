@@ -29,7 +29,18 @@ namespace GearArena.Behaviors
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = _input.LeftDirectional * 1000f;
+            Vector2 direction = _input.LeftDirectional;
+
+            if (direction != Vector2.Zero)
+            {
+                Entity.Sprite.ChangeAnimation(1);
+                Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = _input.LeftDirectional * 1000f;
+            }
+            else
+            {
+                Entity.Sprite.ChangeAnimation(0);
+                Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = Vector2.Zero;
+            }
         }
         #endregion Methods
     }
