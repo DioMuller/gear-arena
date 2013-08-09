@@ -34,6 +34,9 @@ namespace GearArena
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.IsFullScreen = true;
 
+            SoundManager.BGMFolder = "audio/bgm";
+            SoundManager.SEFolder = "audio/se";
+
             Content.RootDirectory = "Content";
         }
 
@@ -85,6 +88,7 @@ namespace GearArena
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            //SoundManager.PlayBGM("Cold Funk");
             _player.Update(gameTime);
 
             base.Update(gameTime);
