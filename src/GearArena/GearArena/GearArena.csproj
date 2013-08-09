@@ -35,6 +35,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\ControllableBehavior.cs" />
     <Compile Include="Behaviors\SolidBodyBehavior.cs" />
     <Compile Include="Entities\CollidibleEntity.cs" />
     <Compile Include="Entities\Player.cs" />
