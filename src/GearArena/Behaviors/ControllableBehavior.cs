@@ -66,7 +66,7 @@ namespace GearArena.Behaviors
 
                 if (weapon != null)
                 {
-                    weapon.Shoot(1000, AmmoType.Light);
+                    weapon.Shoot(50f, AmmoType.Light);
                 }
 
                 _ready = false;

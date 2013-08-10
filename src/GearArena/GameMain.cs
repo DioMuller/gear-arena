@@ -11,6 +11,7 @@ using MonoGameLib.Tiled;
 using MonoGameLib.Core;
 using GearArena.Entities;
 using GearArena.Behaviors;
+using GearArena.Components;
 #endregion
 
 namespace GearArena
@@ -21,10 +22,7 @@ namespace GearArena
     public class GameMain : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-
-        private Map _map;
-        private Player _player;
+        private Level _level;
 
         public GameMain()
             : base()
@@ -50,6 +48,9 @@ namespace GearArena
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            _level = new Level(this);
+            Components.Add(_level);
+            GameContent.Initialize(Content); 
 
             base.Initialize();
         }
@@ -60,15 +61,6 @@ namespace GearArena
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-            GameContent.Initialize(Content); 
-
-            _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
-            _player = new Player(){ Position = new Vector2(100f, 100f) };
-
-            CollidableBehavior collision = _player.GetBehavior<CollidableBehavior>();
-            collision.CheckCollision += new CheckCollisionDelegate(() => { return _map.Collides(collision.CollisionRect); });
         }
 
         /// <summary>
@@ -90,9 +82,6 @@ namespace GearArena
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            SoundManager.PlayBGM("Neolith");
-            _player.Update(gameTime);
-
             base.Update(gameTime);
         }
 
@@ -102,13 +91,6 @@ namespace GearArena
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone, null, Matrix.CreateScale(2f));
-            _map.Draw(gameTime, _spriteBatch, Vector2.Zero);
-            _player.Draw(gameTime, _spriteBatch);
-            _spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

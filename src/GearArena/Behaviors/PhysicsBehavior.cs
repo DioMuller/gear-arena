@@ -80,7 +80,7 @@ namespace GearArena.Behaviors
             //Forces applied once
             while( Forces.Count > 0 )
             {
-                forces += Forces.Pop();
+                forces += Forces.Pop() * (1f / secs); //Since it will be applied only once, must do a BIG BOOM.
             }
             #endregion Calculate Forces
 

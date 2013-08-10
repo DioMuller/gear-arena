@@ -4,17 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using MonoGameLib.Core.Entities;
+using GearArena.Components;
 
 namespace GearArena.Behaviors
 {
-    #region Delegates
-    /// <summary>
-    /// Checks if new position is valid.
-    /// </summary>
-    /// <returns>Valid movement.</returns>
-    public delegate bool CheckCollisionDelegate();
-    #endregion Delegates
-
     /// <summary>
     /// Class that represents an collidible behavior.
     /// </summary>
@@ -22,6 +15,7 @@ namespace GearArena.Behaviors
     {
         #region Attributes
         public Vector2 _oldPosition;
+        private Level _level;
         #endregion Attributes
 
         #region Properties
@@ -34,17 +28,14 @@ namespace GearArena.Behaviors
         }
         #endregion Properties
 
-        #region Delegates
-        public CheckCollisionDelegate CheckCollision { get; set; }
-        #endregion Delegates
-
         #region Constructor
         /// <summary>
         /// Basically, the same constructor as Entity.
         /// </summary>
-        public CollidableBehavior(Entity parent) : base(parent) 
+        public CollidableBehavior(Entity parent, Level level) : base(parent) 
         {
             _oldPosition = Vector2.Zero;
+            _level = level;
         }
         #endregion Constructor
 
@@ -56,7 +47,7 @@ namespace GearArena.Behaviors
             #region Check X
             Entity.Position = new Vector2(newPosition.X, _oldPosition.Y);
 
-            if (CheckCollision != null && CheckCollision())
+            if (_level != null && _level.Collides(CollisionRect))
             {
                 Entity.Position = _oldPosition;
             }
@@ -69,7 +60,7 @@ namespace GearArena.Behaviors
             #region Check Y
             Entity.Position = new Vector2(_oldPosition.X, newPosition.Y);
 
-            if (CheckCollision != null && CheckCollision())
+            if (_level != null && _level.Collides(CollisionRect))
             {
                 Entity.Position = _oldPosition;
             }

@@ -24,11 +24,13 @@ namespace GearArena.Entities
         #region Methods
         public void Shoot(float force_n, AmmoType type)
         {
-            float offsetAngle = Sprite.Origin.GetAngle();
-            Vector2 ammoOffset = new Vector2(0, 1).RotateRadians(Rotation - offsetAngle);
+            Vector2 ammoOffset = new Vector2(0, -1).RotateRadians(Rotation);
             Vector2 force = ammoOffset * force_n;
 
-            Children.Add(new Ammo( force, type ) { Parent = this, Position = ammoOffset * 20 + (Position + Parent.Position) } );
+            if( this.Parent is Player )
+            {
+                Children.Add(new Ammo((this.Parent as Player).Level, force, type) { Parent = this, Position = ammoOffset * 20 + (Position + Parent.Position) });
+            }
         }
         #endregion Methods
     }
