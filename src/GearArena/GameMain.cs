@@ -33,7 +33,7 @@ namespace GearArena
 
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
-            _graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = false;
 
             SoundManager.BGMFolder = "audio/bgm";
             SoundManager.SEFolder = "audio/se";

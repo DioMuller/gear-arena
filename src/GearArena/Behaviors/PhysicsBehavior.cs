@@ -43,6 +43,11 @@ namespace GearArena.Behaviors
         /// Does the entity rotate with the force?
         /// </summary>
         public bool Rotate { get; set; }
+
+        /// <summary>
+        /// Constant friction being applied on the body.
+        /// </summary>
+        public Vector2 Friction { get; set; }
         #endregion Properties
 
         #region Constructors
@@ -50,6 +55,8 @@ namespace GearArena.Behaviors
         {
             Forces = new Stack<Vector2>();
             ConstantForces = new Dictionary<string,Vector2>();
+
+            Friction = Vector2.One;
         }
         #endregion Constructors
 
@@ -82,6 +89,7 @@ namespace GearArena.Behaviors
 
             Entity.Position += (Momentum + accelSecs/2) * secs;
             Momentum += accelSecs;
+            Momentum *= (Vector2.One - Friction);
 
             if( Rotate )
             {
