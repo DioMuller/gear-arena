@@ -52,7 +52,7 @@ namespace GearArena.Behaviors
 
                 if( weapon != null )
                 {
-                    weapon.Rotation += direction.Y / 10f;
+                    weapon.Rotation += (direction.Y / 10f) % 2f;
                 }
             }
 
