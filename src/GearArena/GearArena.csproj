@@ -37,12 +37,15 @@
   <ItemGroup>
     <Compile Include="Behaviors\ControllableBehavior.cs" />
     <Compile Include="Behaviors\PhysicsBehavior.cs" />
-    <Compile Include="Behaviors\CollidibleBehavior.cs" />
+    <Compile Include="Behaviors\CollidableBehavior.cs" />
     <Compile Include="Entities\Ammo.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Weapon.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Components\Level.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\ParticleEmiter.cs" />
+    <Compile Include="Particles\ParticleState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,7 +56,7 @@
     </Reference>
     <Reference Include="MonoGame.Framework, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\All\monogame-aux-lib\references\MonoGame\v3.0\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\..\references\WinGL\MonoGame\3.2\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -89,7 +92,16 @@
     <Content Include="Content\audio\bgm\Wah Game Loop.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\sprites\ammo.png">
+    <Content Include="Content\images\particles\dust.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\sprites\ammo-heavy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\sprites\ammo-light.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\sprites\ammo-medium.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\sprites\mecha.png">
