@@ -40,6 +40,10 @@ namespace MonoGameLib.Core.Particles
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Updates particle emiter.
+        /// </summary>
+        /// <param name="gameTime">Current game time.</param>
         public void Update(GameTime gameTime)
         {
             _sinceLastEmision += gameTime.ElapsedGameTime.Milliseconds;
@@ -63,12 +67,15 @@ namespace MonoGameLib.Core.Particles
                 foreach (Particle p in toRemove)
                 {
                     _particles.Remove(p);
-
-                    //TODO: Dispose?
                 }
             }
         }
 
+        /// <summary>
+        /// Draw the particles.
+        /// </summary>
+        /// <param name="gameTime">Current Game Time.</param>
+        /// <param name="spriteBatch">Sprite Batch.</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             foreach (Particle p in _particles)

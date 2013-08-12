@@ -40,18 +40,33 @@ namespace GearArena.Entities
 
             GetBehavior<PhysicsBehavior>().Momentum = initialForce;
 
-            Sprite = new Sprite("images/sprites/ammo.png", new Point(12, 12), 0);
-            Sprite.Origin = new Vector2(12,12);
+            switch (type)
+            {
+                case AmmoType.Light:
+                    Sprite = new Sprite("images/sprites/ammo-light.png", new Point(4, 6), 0);
+                    break;
+                case AmmoType.Medium:
+                    Sprite = new Sprite("images/sprites/ammo-medium.png", new Point(6, 8), 0);
+                    break;
+                case AmmoType.Heavy:
+                    Sprite = new Sprite("images/sprites/ammo-heavy.png", new Point(8, 11), 0);
+                    break;
+                default:
 
-            Sprite.Animations.Add(new Animation("heavy", 0, 0, 0));
-            Sprite.Animations.Add(new Animation("medium", 1, 0, 0));
-            Sprite.Animations.Add(new Animation("light", 2, 0, 0));
+                    break;
+            }
+            
+            Sprite.Animations.Add(new Animation("any", 0, 0, 0));
 
-            Sprite.ChangeAnimation((int) type);
+            Sprite.ChangeAnimation(0);
 
             List<ParticleState> particleStates = new List<ParticleState>();
-            particleStates.Add(new ParticleState() { StartTime = 0f, Color = Color.Yellow * 0.3f, Scale = .5f });
-            particleStates.Add(new ParticleState() { StartTime = 300f, Color = Color.Red * 0.3f, Scale = 1f });
+            particleStates.Add(new ParticleState() { StartTime = 0f, Color = Color.Transparent, Scale = .1f });
+            particleStates.Add(new ParticleState() { StartTime = 100f, Color = Color.DarkGray * 0.3f, Scale = .8f });
+            particleStates.Add(new ParticleState() { StartTime = 150f, Color = Color.Gray * 0.3f, Scale = 1f });
+            particleStates.Add(new ParticleState() { StartTime = 200f, Color = Color.White * 0.2f, Scale = 1.2f });
+            particleStates.Add(new ParticleState() { StartTime = 300f, Color = Color.White * 0.2f, Scale = 1.5f });
+            particleStates.Add(new ParticleState() { StartTime = 400f, Color = Color.White * 0.2f, Scale = 1.8f });
             particleStates.Add(new ParticleState() { StartTime = 500f, Color = Color.White * 0.2f, Scale = 2f });
 
             _particles = new ParticleEmiter("images/particles/dust.png", particleStates) { ParticleMaxTime = 5000f, MillisecondsToEmit = 16f, OpeningAngle = 30f, ParticleSpeed = 0.1f };
@@ -61,7 +76,7 @@ namespace GearArena.Entities
         #region Methods
         public override void Update(GameTime gameTime)
         {
-            _particles.Position = this.Position + new Vector2(6,6);
+            _particles.Position = this.Position;
             _particles.Direction = new Vector2(0, -1).RotateRadians(GetBehavior<PhysicsBehavior>().Momentum.GetAngle());
 
             _particles.Update(gameTime);
