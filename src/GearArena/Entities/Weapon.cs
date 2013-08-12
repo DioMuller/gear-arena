@@ -26,7 +26,7 @@ namespace GearArena.Entities
         {
             Vector2 direction = new Vector2(0, -1).RotateRadians(Rotation);
             Vector2 force = direction * force_n;
-            Vector2 ammoOffset = direction * 32;
+            Vector2 ammoOffset = direction * (new Vector2(16f) + Position + Sprite.Origin); //TODO: Make this better.
 
             if( this.Parent is Player )
             {

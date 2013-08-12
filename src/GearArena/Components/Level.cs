@@ -43,8 +43,10 @@ namespace GearArena.Components
 
             _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
             Player player = new Player(this) { Position = new Vector2(100f, 100f) };
+            Player player2 = new Player(this) { Position = new Vector2(500f, 100f) };
 
             Entities.Add(player);
+            Entities.Add(player2);
         }
 
         public override void Update(GameTime gameTime)
