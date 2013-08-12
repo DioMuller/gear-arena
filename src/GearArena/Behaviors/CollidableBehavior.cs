@@ -8,6 +8,10 @@ using GearArena.Components;
 
 namespace GearArena.Behaviors
 {
+    #region Delegates
+    public delegate void OnCollideDelegate(List<Entity> entities);
+    #endregion Delegates
+
     /// <summary>
     /// Class that represents an collidible behavior.
     /// </summary>
@@ -27,6 +31,10 @@ namespace GearArena.Behaviors
             }
         }
         #endregion Properties
+
+        #region Delegates
+        public OnCollideDelegate OnCollide { get; set; }
+        #endregion Delegates
 
         #region Constructor
         /// <summary>
@@ -49,7 +57,8 @@ namespace GearArena.Behaviors
 
             if (_level != null && _level.Collides(CollisionRect))
             {
-                Entity.Position = _oldPosition;
+                if (OnCollide != null) OnCollide(new List<Entity>());
+                else Entity.Position = _oldPosition;
             }
             else
             {
@@ -62,13 +71,37 @@ namespace GearArena.Behaviors
 
             if (_level != null && _level.Collides(CollisionRect))
             {
-                Entity.Position = _oldPosition;
+                if (OnCollide != null) OnCollide(new List<Entity>());
+                else Entity.Position = _oldPosition;
             }
             else
             {
                 _oldPosition = Entity.Position;
             }
             #endregion Check Y
+
+            #region Check Entities
+            List<Entity> collided = new List<Entity>();
+
+            foreach (Entity e in _level.Entities)
+            {
+                CollidableBehavior collision = e.GetBehavior<CollidableBehavior>();
+
+                if (collision != null)
+                {
+                    if (collision.CollisionRect.Intersects(CollisionRect))
+                    {
+                        collided.Add(collision.Entity);
+                    }
+                }
+            }
+
+            if (collided.Count != 0)
+            {
+                if (OnCollide != null) OnCollide(collided);
+                else Entity.Position = _oldPosition;
+            }
+            #endregion Check Entities
         }
         #endregion Methods
     }

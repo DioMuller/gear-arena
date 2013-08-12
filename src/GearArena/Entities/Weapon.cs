@@ -26,7 +26,7 @@ namespace GearArena.Entities
         {
             Vector2 direction = new Vector2(0, -1).RotateRadians(Rotation);
             Vector2 force = direction * force_n;
-            Vector2 ammoOffset = direction * 20;
+            Vector2 ammoOffset = direction * 32;
 
             if( this.Parent is Player )
             {
