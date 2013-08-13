@@ -137,7 +137,8 @@ namespace GearArena.Entities
 
                 if (p != null)
                 {
-                    //TODO: Remove health!
+                    int damage = (Type == AmmoType.Light) ? 5 : (Type == AmmoType.Medium) ? 10 : 20;
+                    p.Hit(damage);
                 }
             }
             #endregion Collision with players

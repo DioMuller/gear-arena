@@ -43,6 +43,7 @@
     <Compile Include="Entities\Weapon.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Components\Level.cs" />
+    <Compile Include="GUI\PlayerGUI.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\ParticleEmiter.cs" />
     <Compile Include="Particles\ParticleState.cs" />
@@ -136,6 +137,11 @@
       <Project>{f2c71160-3c00-40dd-ab52-151c9a914570}</Project>
       <Name>MonoGameLib.Tiled</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\DefaultFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

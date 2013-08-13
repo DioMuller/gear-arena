@@ -8,13 +8,19 @@ using Microsoft.Xna.Framework;
 using MonoGameLib.Core.Entities;
 using MonoGameLib.Core.Input;
 using MonoGameLib.Core.Sprites;
+using GearArena.GUI;
 
 namespace GearArena.Entities
 {
     public class Player : Entity
     {
+        #region Attributes
+        private PlayerGUI _gui;
+        #endregion Attributes
+
         #region Properties
         public Level Level { get; private set; }
+        public int Health { get; private set; }
         #endregion Properties
 
         #region Constructor
@@ -26,6 +32,10 @@ namespace GearArena.Entities
 
             Level = level;
 
+            _gui = new PlayerGUI(this);
+
+            Health = 100;
+
             Sprite = new Sprite("images/sprites/mecha.png", new Point(32, 32), 100);
 
             Sprite.Animations.Add( new Animation("idle", 0, 0, 0) );
@@ -36,5 +46,20 @@ namespace GearArena.Entities
             Children.Add(new Weapon() { Parent = this, Position = new Vector2(8,16), FollowParent = true } );
         }
         #endregion Constructor
+
+        #region Methods
+        public override void Draw(GameTime gameTime, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        {
+            base.Draw(gameTime, spriteBatch);
+            _gui.Draw(gameTime, spriteBatch);
+        }
+
+        public void Hit(int health)
+        {
+            Health -= health;
+
+            //TODO: Kill
+        }
+        #endregion Methods
     }
 }
