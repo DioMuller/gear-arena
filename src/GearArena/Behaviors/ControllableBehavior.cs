@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GearArena.Components;
 using GearArena.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -67,6 +68,8 @@ namespace GearArena.Behaviors
                 if (weapon != null)
                 {
                     weapon.Shoot(100f, AmmoType.Light);
+
+                    (Entity as Player).Level.ChangeState(GameState.Shooting);
                 }
 
                 _ready = false;

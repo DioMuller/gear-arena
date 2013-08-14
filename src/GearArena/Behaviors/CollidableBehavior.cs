@@ -83,7 +83,7 @@ namespace GearArena.Behaviors
             #region Check Entities
             List<Entity> collided = new List<Entity>();
 
-            foreach (Entity e in _level.Entities)
+            foreach (Entity e in _level.Players)
             {
                 CollidableBehavior collision = e.GetBehavior<CollidableBehavior>();
 
