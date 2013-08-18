@@ -61,7 +61,6 @@ namespace GearArena.Entities
             }
             
             Sprite.Animations.Add(new Animation("any", 0, 0, 0));
-
             Sprite.ChangeAnimation(0);
 
             #region Particle
