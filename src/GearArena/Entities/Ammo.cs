@@ -42,7 +42,7 @@ namespace GearArena.Entities
                 OnCollide = new OnCollideDelegate(OnCollision)
             });
 
-            GetBehavior<PhysicsBehavior>().Momentum = initialForce;
+            GetBehavior<PhysicsBehavior>().Forces.Push(initialForce);
             GetBehavior<PhysicsBehavior>().ConstantForces["Wind"] = GlobalForces.Wind;
 
             switch (type)

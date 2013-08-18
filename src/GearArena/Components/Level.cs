@@ -95,7 +95,7 @@ namespace GearArena.Components
                         en.GetBehavior<ControllableBehavior>().IsActive = false;
                     }
 
-                    GlobalForces.Wind = new Vector2(RandomNumberGenerator.Next(-1f, 1f), 0f);
+                    GlobalForces.Wind = new Vector2(RandomNumberGenerator.Next(-1f, 1f), 0f) * RandomNumberGenerator.Next(0f, 10f);
 
                     Players[_currentPlayer].GetBehavior<ControllableBehavior>().IsActive = true;
 

@@ -10,6 +10,7 @@ namespace GearArena.Behaviors
 {
     #region Delegates
     public delegate void OnCollideDelegate(List<Entity> entities);
+    public delegate void OnCollideExitDelegate();
     #endregion Delegates
 
     /// <summary>
@@ -20,6 +21,7 @@ namespace GearArena.Behaviors
         #region Attributes
         public Vector2 _oldPosition;
         private Level _level;
+        private bool _wasColliding;
         #endregion Attributes
 
         #region Properties
@@ -30,10 +32,13 @@ namespace GearArena.Behaviors
                 return new Rectangle((int)Entity.Position.X, (int)Entity.Position.Y, Entity.Sprite.FrameSize.X, Entity.Sprite.FrameSize.Y);
             }
         }
+
+        public bool OnGround { get; private set; }
         #endregion Properties
 
         #region Delegates
         public OnCollideDelegate OnCollide { get; set; }
+        public OnCollideExitDelegate OnCollideExit { get; set; }
         #endregion Delegates
 
         #region Constructor
@@ -44,6 +49,7 @@ namespace GearArena.Behaviors
         {
             _oldPosition = Vector2.Zero;
             _level = level;
+            _wasColliding = false;
         }
         #endregion Constructor
 
@@ -58,10 +64,13 @@ namespace GearArena.Behaviors
             if (_level != null && _level.Collides(CollisionRect))
             {
                 if (OnCollide != null) OnCollide(new List<Entity>());
-                else Entity.Position = _oldPosition;
+                Entity.Position = _oldPosition;
+
+                _wasColliding = true;
             }
             else
             {
+                if (OnCollideExit != null) OnCollideExit();
                 _oldPosition = Entity.Position;
             }
             #endregion Check X
@@ -72,10 +81,13 @@ namespace GearArena.Behaviors
             if (_level != null && _level.Collides(CollisionRect))
             {
                 if (OnCollide != null) OnCollide(new List<Entity>());
-                else Entity.Position = _oldPosition;
+                Entity.Position = _oldPosition;
+
+                _wasColliding = true;
             }
             else
             {
+                if (OnCollideExit != null && _wasColliding) OnCollideExit();
                 _oldPosition = Entity.Position;
             }
             #endregion Check Y

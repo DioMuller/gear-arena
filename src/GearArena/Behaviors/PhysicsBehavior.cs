@@ -17,7 +17,7 @@ namespace GearArena.Behaviors
         /// <summary>
         /// Body momentum.
         /// </summary>
-        public Vector2 Momentum { get; set; }
+        public Vector2 Momentum { get; private set; }
 
         /// <summary>
         /// Gravity being applied on the body.
@@ -68,6 +68,7 @@ namespace GearArena.Behaviors
         public override void Update(GameTime gameTime)
         {
             Vector2 forces = Vector2.Zero;
+            Vector2 instantForces = Vector2.Zero;
             float secs = (float)gameTime.ElapsedGameTime.TotalSeconds; 
 
             #region Calculate Forces
@@ -80,15 +81,15 @@ namespace GearArena.Behaviors
             //Forces applied once
             while( Forces.Count > 0 )
             {
-                forces += Forces.Pop() * (1f / secs); //Since it will be applied only once, must do a BIG BOOM.
+                instantForces += (Forces.Pop() / Mass); //Since it will be applied only once, must do a BIG BOOM.
             }
             #endregion Calculate Forces
 
             Vector2 acceleration = (forces / Mass) + Gravity;
             Vector2 accelSecs = acceleration * secs;
 
-            Entity.Position += (Momentum + accelSecs/2) * secs;
-            Momentum += accelSecs;
+            Entity.Position += GlobalForces.MetersToPixels( (Momentum + accelSecs/2) * secs );
+            Momentum += (accelSecs + instantForces);
             Momentum *= (Vector2.One - Friction);
 
             if( Rotate )

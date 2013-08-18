@@ -26,7 +26,7 @@ namespace GearArena.Entities
         #region Constructor
         public Player(Level level) : base()
         {
-            Behaviors.Add(new PhysicsBehavior(this) { Mass = 10f, Rotate = false, Gravity = new Vector2(0f, 9.8f), Friction = new Vector2(0.01f, 0f) } );
+            Behaviors.Add(new PhysicsBehavior(this) { Mass = 10f, Rotate = false, Gravity = GlobalForces.Gravity, Friction = new Vector2(0.01f, 0f) } );
             Behaviors.Add(new ControllableBehavior(this, new KeyboardInput()));
             Behaviors.Add(new CollidableBehavior(this, level));
 
