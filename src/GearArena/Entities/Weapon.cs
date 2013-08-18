@@ -33,7 +33,7 @@ namespace GearArena.Entities
             Ammo ammo = new Ammo((this.Parent as Player).Level, force, type) { Parent = this };
 
             Vector2 positionCentered = (Parent.Position + ParentCenter); //Weapon origin position.
-            Vector2 weaponOffset = new Vector2(ammo.Size.X / 2, Size.Y + ammo.Size.Y).RotateRadians(Rotation);
+            Vector2 weaponOffset = new Vector2(ammo.Size.X / 2, Size.Y + ammo.Size.Y).RotateRadians(Rotation); //Add ammo size as offset, relocates bullet Y.
 
             ammo.Position = (positionCentered - weaponOffset);
 

@@ -36,13 +36,14 @@ namespace GearArena.Entities
         #region Constructor
         public Ammo(Level level, Vector2 initialForce, AmmoType type) : base()
         {
-            Behaviors.Add(new PhysicsBehavior(this) { Mass = 3f - (float) type, Rotate = true, Gravity = new Vector2(0f, 9.8f), Friction = new Vector2( 0f, 0f ) });
+            Behaviors.Add(new PhysicsBehavior(this) { Mass = 3f - (float) type, Rotate = true, Gravity = GlobalForces.Gravity, Friction = new Vector2( 0f, 0f ) });
             Behaviors.Add(new CollidableBehavior(this, level)
             {
                 OnCollide = new OnCollideDelegate(OnCollision)
             });
 
             GetBehavior<PhysicsBehavior>().Momentum = initialForce;
+            GetBehavior<PhysicsBehavior>().ConstantForces["Wind"] = GlobalForces.Wind;
 
             switch (type)
             {
@@ -81,14 +82,19 @@ namespace GearArena.Entities
         #region Methods
         public override void Update(GameTime gameTime)
         {
-            _particles.Position = this.Position;
-            _particles.Direction = new Vector2(0, -1).RotateRadians(GetBehavior<PhysicsBehavior>().Momentum.GetAngle());
+            PhysicsBehavior physics = GetBehavior<PhysicsBehavior>();
 
-            _particles.Update(gameTime);
-
-            if (_explosion != null)
+            if( physics != null )
             {
-                _explosion.Update(gameTime);
+                _particles.Position = this.Position;
+                _particles.Direction = new Vector2(0, -1).RotateRadians(physics.Momentum.GetAngle());
+
+                _particles.Update(gameTime);
+
+                if (_explosion != null)
+                {
+                    _explosion.Update(gameTime);
+                }
             }
 
             base.Update(gameTime);

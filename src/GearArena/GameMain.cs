@@ -52,6 +52,8 @@ namespace GearArena
             Components.Add(_level);
             GameContent.Initialize(Content); 
 
+            GlobalForces.Gravity = new Vector2(0.0f, 9.8f);
+
             base.Initialize();
         }
 

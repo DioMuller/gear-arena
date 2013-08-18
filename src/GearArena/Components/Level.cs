@@ -75,7 +75,7 @@ namespace GearArena.Components
                     }
                     break;
                 case GameState.Shooting:
-                    //TODO: OHH LA LA, simplificar?
+                    //TODO: Simplificar?
                     if( Players[_currentPlayer].Children.OfType<Weapon>().First().Children.OfType<Ammo>().Count() == 0 )
                     {
                         _currentState = GameState.NextTurn;
@@ -94,6 +94,8 @@ namespace GearArena.Components
                     {
                         en.GetBehavior<ControllableBehavior>().IsActive = false;
                     }
+
+                    GlobalForces.Wind = new Vector2(RandomNumberGenerator.Next(-1f, 1f), 0f);
 
                     Players[_currentPlayer].GetBehavior<ControllableBehavior>().IsActive = true;
 

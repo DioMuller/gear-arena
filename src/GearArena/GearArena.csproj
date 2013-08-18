@@ -43,6 +43,7 @@
     <Compile Include="Entities\Weapon.cs" />
     <Compile Include="GameMain.cs" />
     <Compile Include="Components\Level.cs" />
+    <Compile Include="GlobalForces.cs" />
     <Compile Include="GUI\PlayerGUI.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\ParticleEmiter.cs" />
@@ -143,9 +144,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Screens\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
