@@ -18,8 +18,9 @@ namespace GearArena.Behaviors
     public class CollidableBehavior : Behavior
     {
         #region Attributes
-        public Vector2 _oldPosition;
+        private Vector2 _oldPosition;
         private Level _level;
+        private PhysicsBehavior _physics;
         #endregion Attributes
 
         #region Properties
@@ -28,6 +29,19 @@ namespace GearArena.Behaviors
             get
             {
                 return new Rectangle((int)Entity.Position.X, (int)Entity.Position.Y, Entity.Sprite.FrameSize.X, Entity.Sprite.FrameSize.Y);
+            }
+        }
+
+        public PhysicsBehavior Physics
+        {
+            get
+            {
+                if (_physics == null)
+                {
+                    _physics = Entity.GetBehavior<PhysicsBehavior>();
+                }
+
+                return _physics;
             }
         }
         #endregion Properties
@@ -59,6 +73,10 @@ namespace GearArena.Behaviors
             {
                 if (OnCollide != null) OnCollide(new List<Entity>());
                 else Entity.Position = _oldPosition;
+
+                //If collided on X, stops X momentum.
+                //That way, the gravity (and other forces to that) will not accumulate.
+                if (Physics != null) Physics.Momentum = new Vector2(0f, Physics.Momentum.Y);
             }
             else
             {
@@ -73,6 +91,10 @@ namespace GearArena.Behaviors
             {
                 if (OnCollide != null) OnCollide(new List<Entity>());
                 else Entity.Position = _oldPosition;
+
+                //If collided on Y, stops Y momentum.
+                //That way, the gravity (and other forces to that) will not accumulate. 
+                if (Physics != null) Physics.Momentum = new Vector2(Physics.Momentum.X, 0f);
             }
             else
             {

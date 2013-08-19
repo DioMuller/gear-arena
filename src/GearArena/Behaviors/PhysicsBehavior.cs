@@ -11,7 +11,7 @@ namespace GearArena.Behaviors
     /// <summary>
     /// Solid body physics behavior.
     /// </summary>
-    class PhysicsBehavior : Behavior
+    public class PhysicsBehavior : Behavior
     {
         #region Properties
         /// <summary>
