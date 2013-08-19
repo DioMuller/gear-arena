@@ -10,7 +10,6 @@ namespace GearArena.Behaviors
 {
     #region Delegates
     public delegate void OnCollideDelegate(List<Entity> entities);
-    public delegate void OnCollideExitDelegate();
     #endregion Delegates
 
     /// <summary>
@@ -19,9 +18,9 @@ namespace GearArena.Behaviors
     public class CollidableBehavior : Behavior
     {
         #region Attributes
-        public Vector2 _oldPosition;
+        private Vector2 _oldPosition;
         private Level _level;
-        private bool _wasColliding;
+        private PhysicsBehavior _physics;
         #endregion Attributes
 
         #region Properties
@@ -33,12 +32,22 @@ namespace GearArena.Behaviors
             }
         }
 
-        public bool OnGround { get; private set; }
+        public PhysicsBehavior Physics
+        {
+            get
+            {
+                if (_physics == null)
+                {
+                    _physics = Entity.GetBehavior<PhysicsBehavior>();
+                }
+
+                return _physics;
+            }
+        }
         #endregion Properties
 
         #region Delegates
         public OnCollideDelegate OnCollide { get; set; }
-        public OnCollideExitDelegate OnCollideExit { get; set; }
         #endregion Delegates
 
         #region Constructor
@@ -49,7 +58,6 @@ namespace GearArena.Behaviors
         {
             _oldPosition = Vector2.Zero;
             _level = level;
-            _wasColliding = false;
         }
         #endregion Constructor
 
@@ -64,13 +72,14 @@ namespace GearArena.Behaviors
             if (_level != null && _level.Collides(CollisionRect))
             {
                 if (OnCollide != null) OnCollide(new List<Entity>());
-                Entity.Position = _oldPosition;
+                else Entity.Position = _oldPosition;
 
-                _wasColliding = true;
+                //If collided on X, stops X momentum.
+                //That way, the gravity (and other forces to that) will not accumulate.
+                if (Physics != null) Physics.Momentum = new Vector2(0f, Physics.Momentum.Y);
             }
             else
             {
-                if (OnCollideExit != null) OnCollideExit();
                 _oldPosition = Entity.Position;
             }
             #endregion Check X
@@ -81,13 +90,14 @@ namespace GearArena.Behaviors
             if (_level != null && _level.Collides(CollisionRect))
             {
                 if (OnCollide != null) OnCollide(new List<Entity>());
-                Entity.Position = _oldPosition;
+                else Entity.Position = _oldPosition;
 
-                _wasColliding = true;
+                //If collided on Y, stops Y momentum.
+                //That way, the gravity (and other forces to that) will not accumulate. 
+                if (Physics != null) Physics.Momentum = new Vector2(Physics.Momentum.X, 0f);
             }
             else
             {
-                if (OnCollideExit != null && _wasColliding) OnCollideExit();
                 _oldPosition = Entity.Position;
             }
             #endregion Check Y
