@@ -16,13 +16,21 @@ using GearArena.Components;
 
 namespace GearArena
 {
+    public enum GameState
+    {
+        Playing,
+        GameOver
+    }
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
     public class GameMain : Game
     {
         private GraphicsDeviceManager _graphics;
+
         private Level _level;
+        private GameOver _gameOver;
 
         public GameMain()
             : base()
@@ -32,6 +40,8 @@ namespace GearArena
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
             _graphics.IsFullScreen = false;
+
+            _graphics.ApplyChanges();
 
             SoundManager.BGMFolder = "audio/bgm";
             SoundManager.SEFolder = "audio/se";
@@ -47,12 +57,7 @@ namespace GearArena
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            _level = new Level(this);
-            Components.Add(_level);
             GameContent.Initialize(Content); 
-
-            GlobalForces.Gravity = new Vector2(0.0f, 9.8f);
 
             base.Initialize();
         }
@@ -63,6 +68,19 @@ namespace GearArena
         /// </summary>
         protected override void LoadContent()
         {
+            _level = new Level(this);
+            _gameOver = new GameOver(this);
+
+            Components.Add(_level);
+            Components.Add(_gameOver);
+
+            _level.Enabled = true;
+            _level.Visible = true;
+
+            _gameOver.Enabled = false;
+            _gameOver.Visible = false;
+
+            GlobalForces.Gravity = new Vector2(0.0f, 9.8f);
         }
 
         /// <summary>

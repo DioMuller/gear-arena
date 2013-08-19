@@ -12,7 +12,7 @@ using MonoGameLib.Tiled;
 
 namespace GearArena.Components
 {
-    public enum GameState
+    public enum TurnState
     {
         Playing,
         Shooting,
@@ -28,7 +28,7 @@ namespace GearArena.Components
         #region Attributes
         private SpriteBatch _spriteBatch;
 
-        private GameState _currentState;
+        private TurnState _currentState;
         private Map _map;
         private int _currentPlayer;
         #endregion Attributes
@@ -59,7 +59,7 @@ namespace GearArena.Components
             Players.Add(player2);
 
             _currentPlayer = -1;
-            _currentState = GameState.NextTurn;
+            _currentState = TurnState.NextTurn;
         }
 
         public override void Update(GameTime gameTime)
@@ -68,17 +68,17 @@ namespace GearArena.Components
 
             switch( _currentState )
             {
-                case GameState.Playing:
+                case TurnState.Playing:
                     foreach (Player en in Players)
                     {
                         en.Update(gameTime);
                     }
                     break;
-                case GameState.Shooting:
+                case TurnState.Shooting:
                     //TODO: Simplificar?
                     if( Players[_currentPlayer].Children.OfType<Weapon>().First().Children.OfType<Ammo>().Count() == 0 )
                     {
-                        _currentState = GameState.NextTurn;
+                        _currentState = TurnState.NextTurn;
                     }
                     
                     foreach (Player en in Players)
@@ -86,9 +86,9 @@ namespace GearArena.Components
                         en.Update(gameTime);
                     }
                     break;
-                case GameState.NextTurn:
+                case TurnState.NextTurn:
                     _currentPlayer = (_currentPlayer+1) % Players.Count;
-                    _currentState = GameState.Playing;
+                    _currentState = TurnState.Playing;
 
                     foreach (Player en in Players)
                     {
@@ -125,9 +125,9 @@ namespace GearArena.Components
             return _map.Collides(collisionRect, IgnoredTerrains);
         }
 
-        public void ChangeState(GameState state)
+        public void ChangeState(TurnState state)
         {
-            if( state == GameState.Shooting )
+            if (state == TurnState.Shooting)
             {
                 Players[_currentPlayer].GetBehavior<ControllableBehavior>().IsActive = false;
             }
