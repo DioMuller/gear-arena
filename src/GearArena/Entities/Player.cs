@@ -14,10 +14,6 @@ namespace GearArena.Entities
 {
     public class Player : Entity
     {
-        #region Attributes
-        private PlayerGUI _gui;
-        #endregion Attributes
-
         #region Properties
         public Level Level { get; private set; }
         public int Health { get; private set; }
@@ -31,8 +27,6 @@ namespace GearArena.Entities
             Behaviors.Add(new PhysicsBehavior(this) { Mass = 10f, Rotate = false, Gravity = new Vector2(0f, 9.8f), Friction = new Vector2(0.01f, 0f) } );
 
             Level = level;
-
-            _gui = new PlayerGUI(this);
 
             Health = 100;
 
@@ -51,7 +45,6 @@ namespace GearArena.Entities
         public override void Draw(GameTime gameTime, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            _gui.Draw(gameTime, spriteBatch);
         }
 
         public void Hit(int health)
@@ -59,6 +52,7 @@ namespace GearArena.Entities
             Health -= health;
 
             //TODO: Kill
+            if( Health <= 0f ) Level.FinishLevel(this);
         }
         #endregion Methods
     }

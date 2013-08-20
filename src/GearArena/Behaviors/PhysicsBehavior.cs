@@ -17,7 +17,7 @@ namespace GearArena.Behaviors
         /// <summary>
         /// Body momentum.
         /// </summary>
-        public Vector2 Momentum { get; private set; }
+        public Vector2 Momentum { get; set; }
 
         /// <summary>
         /// Gravity being applied on the body.

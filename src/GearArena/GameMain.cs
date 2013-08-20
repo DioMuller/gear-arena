@@ -113,5 +113,16 @@ namespace GearArena
         {
             base.Draw(gameTime);
         }
+
+        public void ChangeState(GameState state, object message = null)
+        {
+            switch( state )
+            {
+                case GameState.Playing:
+                break;
+                case GameState.GameOver:
+                break;
+            }
+        }
     }
 }

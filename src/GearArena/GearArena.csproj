@@ -45,6 +45,7 @@
     <Compile Include="GameMain.cs" />
     <Compile Include="Components\Level.cs" />
     <Compile Include="GlobalForces.cs" />
+    <Compile Include="GUI\GameGUI.cs" />
     <Compile Include="GUI\PlayerGUI.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\ParticleEmiter.cs" />
@@ -93,6 +94,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\audio\bgm\Wah Game Loop.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\gui\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\gui\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\particles\dust.png">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GearArena.Behaviors;
 using GearArena.Entities;
+using GearArena.GUI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLib.Core;
@@ -31,6 +32,8 @@ namespace GearArena.Components
         private TurnState _currentState;
         private Map _map;
         private int _currentPlayer;
+        private GameMain _game;
+        private GameGUI _gui;
         #endregion Attributes
 
         #region Properties
@@ -38,7 +41,11 @@ namespace GearArena.Components
         #endregion Properties
 
         #region Constructor
-        public Level(Game game) : base(game) {}
+        public Level(Game game) : base(game) 
+        { 
+            _game = game as GameMain;
+            _gui = new GameGUI(); 
+        }
         #endregion Constructor
 
         #region Methods
@@ -116,6 +123,10 @@ namespace GearArena.Components
             }
             
             _spriteBatch.End();
+
+            _spriteBatch.Begin();
+            _gui.Draw(gameTime, _spriteBatch, _game.Window.ClientBounds);
+            _spriteBatch.End();
         }
         #endregion Override Methods
 
@@ -133,6 +144,11 @@ namespace GearArena.Components
             }
 
             _currentState = state;
+        }
+
+        public void FinishLevel(Player loser)
+        {
+            _game.ChangeState(GameState.GameOver);
         }
         #endregion Public Methods
 
