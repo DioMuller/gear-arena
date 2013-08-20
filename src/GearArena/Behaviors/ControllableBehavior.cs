@@ -76,7 +76,7 @@ namespace GearArena.Behaviors
 
                 if (weapon != null)
                 {
-                    weapon.Shoot(100f, AmmoType.Light);
+                    weapon.Shoot(30f, AmmoType.Light);
 
                     (Entity as Player).Level.ChangeState(TurnState.Shooting);
                 }

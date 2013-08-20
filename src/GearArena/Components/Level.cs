@@ -44,7 +44,8 @@ namespace GearArena.Components
         public Level(Game game) : base(game) 
         { 
             _game = game as GameMain;
-            _gui = new GameGUI(); 
+            _gui = new GameGUI();
+
         }
         #endregion Constructor
 
@@ -64,6 +65,9 @@ namespace GearArena.Components
 
             Players.Add(player);
             Players.Add(player2);
+
+            _gui.Player1 = player;
+            _gui.Player2 = player2;
 
             _currentPlayer = -1;
             _currentState = TurnState.NextTurn;
