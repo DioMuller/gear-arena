@@ -59,7 +59,7 @@ namespace GearArena.Behaviors
 
             if( _input.FaceButtonA == ButtonState.Pressed )
             {
-                (Entity as Player).GetBehavior<PhysicsBehavior>().ConstantForces["Propulsion"] = new Vector2(0f, -20f);
+                (Entity as Player).GetBehavior<PhysicsBehavior>().ConstantForces["Propulsion"] = new Vector2(0f, -2000f);
             }
             else
             {

@@ -18,7 +18,7 @@ namespace GearArena.Components
 
             Container = new Canvas(new Point(rect.X, rect.Y), new Point(rect.Width, rect.Height));
 
-            Container.AddChildren(new Image("images/sprites/mecha.png") { PercentPosition = new Vector2(.5f, .5f), HorizontalAlignment = HorizontalAlign.Center, VerticalAlignment = VerticalAlign.Middle});
+            Container.AddChildren(new Label("Game Over", "fonts/DefaultFont") { PercentPosition = new Vector2(.5f, .5f), HorizontalOrigin = HorizontalAlign.Center, VerticalOrigin = VerticalAlign.Middle, Color = Color.Wheat});
         }
     }
 }
