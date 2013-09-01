@@ -39,6 +39,7 @@ namespace GearArena.Behaviors
             if (direction.X != 0f)
             {
                 Entity.Sprite.ChangeAnimation(1);
+                (Entity as Player).Mirrored = (direction.X < 0f);
                 Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = new Vector2(direction.X * 100f, 0f);
             }
             else

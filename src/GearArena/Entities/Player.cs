@@ -9,6 +9,7 @@ using MonoGameLib.Core.Entities;
 using MonoGameLib.Core.Input;
 using MonoGameLib.Core.Sprites;
 using GearArena.GUI;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GearArena.Entities
 {
@@ -17,6 +18,18 @@ namespace GearArena.Entities
         #region Properties
         public Level Level { get; private set; }
         public int Health { get; private set; }
+
+        public bool Mirrored
+        {
+            get
+            {
+                return (Sprite.Effect == SpriteEffects.FlipHorizontally);
+            }
+            set
+            {
+                Sprite.Effect = (value) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            }
+        }
         #endregion Properties
 
         #region Constructor
