@@ -119,10 +119,17 @@ namespace GearArena
             switch( state )
             {
                 case GameState.Playing:
-                break;
+                    _level = new Level(this);
+                    break;
                 case GameState.GameOver:
-                break;
+                    break;
             }
+
+            _level.Enabled = (state == GameState.Playing);
+            _level.Visible = (state == GameState.Playing);
+
+            _gameOver.Enabled = (state == GameState.GameOver);
+            _gameOver.Visible = (state == GameState.GameOver);
         }
     }
 }

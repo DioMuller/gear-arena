@@ -74,7 +74,7 @@ namespace GearArena.Entities
             particleStates.Add(new ParticleState() { StartTime = 400f, Color = Color.White * 0.1f, Scale = 1.8f });
             particleStates.Add(new ParticleState() { StartTime = 500f, Color = Color.White * 0.05f, Scale = 2f });
 
-            _particles = new ParticleEmiter("images/particles/dust.png", particleStates) { ParticleMaxTime = 5000f, MillisecondsToEmit = 16f, OpeningAngle = 30f, ParticleSpeed = 0.1f };
+            _particles = new ParticleEmiter("images/particles/dust.png", particleStates) { ParticleMaxTime = 1000f, MillisecondsToEmit = 16f, OpeningAngle = 90f, ParticleSpeed = 0.1f };
             #endregion Particle
         }
         #endregion Constructor

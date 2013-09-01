@@ -40,7 +40,13 @@ namespace GearArena.GUI
             Rectangle position_p2 = new Rectangle((int) (window.Width * 0.6), (int)(window.Height * .8f), (int)(window.Width * 0.4f), window.Height / 5);
 
             #region Player 1
-            spriteBatch.Draw(_background, position_p1, Color.Red);
+            spriteBatch.Draw(_background, position_p1, Color.DarkGray);
+
+            if (Player1 != null)
+            {
+                Vector2 p1_pos = new Vector2((float)(position_p1.X + position_p1.Width * 0.1f), (float)(position_p1.Y + position_p1.Height * 0.1f));
+                spriteBatch.DrawString(_font, "Health: " + Player1.Health, p1_pos, Color.White);
+            }
             #endregion Player 1
 
             #region Center
@@ -65,7 +71,13 @@ namespace GearArena.GUI
             #endregion Center
 
             #region Player 2
-            spriteBatch.Draw(_background, position_p2, Color.Blue);
+            spriteBatch.Draw(_background, position_p2, Color.DarkGray);
+
+            if (Player2 != null)
+            {
+                Vector2 p2_pos = new Vector2((float)(position_p2.X + position_p2.Width * 0.1f), (float)(position_p2.Y + position_p2.Height * 0.1f));
+                spriteBatch.DrawString(_font, "Health: " + Player2.Health, p2_pos, Color.White);
+            }
             #endregion Player 2
         }
         #endregion Methods
