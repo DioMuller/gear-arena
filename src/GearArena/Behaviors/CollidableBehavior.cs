@@ -28,7 +28,7 @@ namespace GearArena.Behaviors
         {
             get
             {
-                return new Rectangle((int)Entity.Position.X, (int)Entity.Position.Y, Entity.Sprite.FrameSize.X, Entity.Sprite.FrameSize.Y);
+                return new Rectangle((int)(Entity.Position.X - Entity.Sprite.Origin.X), (int)(Entity.Position.Y - Entity.Sprite.Origin.Y), Entity.Sprite.FrameSize.X, Entity.Sprite.FrameSize.Y);
             }
         }
 
@@ -56,7 +56,7 @@ namespace GearArena.Behaviors
         /// </summary>
         public CollidableBehavior(Entity parent, Level level) : base(parent) 
         {
-            _oldPosition = Vector2.Zero;
+            _oldPosition = parent.Position;
             _level = level;
         }
         #endregion Constructor
