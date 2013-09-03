@@ -45,6 +45,8 @@ namespace GearArena.Entities
             GetBehavior<PhysicsBehavior>().Forces.Push(initialForce);
             GetBehavior<PhysicsBehavior>().ConstantForces["Wind"] = GlobalForces.Wind;
 
+            Type = type;
+
             switch (type)
             {
                 case AmmoType.Light:
@@ -142,7 +144,7 @@ namespace GearArena.Entities
 
                 if (p != null)
                 {
-                    int damage = (Type == AmmoType.Light) ? 5 : (Type == AmmoType.Medium) ? 10 : 20;
+                    int damage = (Type == AmmoType.Light) ? 5 : ((Type == AmmoType.Medium) ? 10 : 20);
                     p.Hit(damage);
                 }
             }
