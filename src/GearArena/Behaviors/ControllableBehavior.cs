@@ -16,6 +16,7 @@ namespace GearArena.Behaviors
         #region Attributes
         private GenericInput _input;
         private bool _ready;
+        private bool _onHold;
         #endregion Attributes
 
         #region Constructors
@@ -24,6 +25,7 @@ namespace GearArena.Behaviors
         {
             _input = input;
             _ready = false;
+            _onHold = false;
         }
         #endregion Constructors
 
@@ -35,6 +37,7 @@ namespace GearArena.Behaviors
         public override void Update(GameTime gameTime)
         {
             Vector2 direction = _input.LeftDirectional;
+            Weapon weapon = Entity.GetChildren<Weapon>();
 
             if (direction.X != 0f)
             {
@@ -50,8 +53,6 @@ namespace GearArena.Behaviors
 
             if( direction.Y != 0f )
             {
-                Weapon weapon = Entity.GetChildren<Weapon>();
-
                 if( weapon != null )
                 {
                     weapon.Rotation += (direction.Y / 10f) % 2f;
@@ -73,16 +74,39 @@ namespace GearArena.Behaviors
             }
             else if( _ready )
             {
-                Weapon weapon = Entity.GetChildren<Weapon>();
-
                 if (weapon != null)
                 {
-                    weapon.Shoot(30f, AmmoType.Light);
+                    weapon.Shoot(30f);
 
                     (Entity as Player).Level.ChangeState(TurnState.Shooting);
                 }
 
                 _ready = false;
+            }
+
+            if (_input.FaceButtonB == ButtonState.Pressed)
+            {
+                if( !_onHold )
+                {
+                    weapon.PrevAmmo();
+                    _onHold = true;
+                }
+            }
+            else
+            {
+                _onHold = false;
+            }
+
+            if (_input.FaceButtonX == ButtonState.Pressed)
+            {
+                if( !_onHold )
+                {
+                    weapon.NextAmmo();
+                }
+            }
+            else
+            {
+                _onHold = false;
             }
         }
         #endregion Methods

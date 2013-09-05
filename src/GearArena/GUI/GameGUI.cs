@@ -16,6 +16,10 @@ namespace GearArena.GUI
         private Texture2D _background;
         private SpriteFont _font;
         private Texture2D _arrow;
+
+        Texture2D _ammoLight;
+        Texture2D _ammoMedium;
+        Texture2D _ammoHeavy;
         #endregion Attributes
 
         #region Properties
@@ -29,6 +33,10 @@ namespace GearArena.GUI
             _background = GameContent.LoadContent<Texture2D>("images/gui/background.png");
             _arrow = GameContent.LoadContent<Texture2D>("images/gui/arrow.png");
             _font = GameContent.LoadContent<SpriteFont>("fonts/DefaultFont");
+
+            _ammoLight = GameContent.LoadContent<Texture2D>("images/sprites/ammo-light.png");
+            _ammoMedium = GameContent.LoadContent<Texture2D>("images/sprites/ammo-medium.png");
+            _ammoHeavy = GameContent.LoadContent<Texture2D>("images/sprites/ammo-heavy.png");
         }
         #endregion Constructors
 
@@ -46,6 +54,29 @@ namespace GearArena.GUI
             {
                 Vector2 p1_pos = new Vector2((float)(position_p1.X + position_p1.Width * 0.1f), (float)(position_p1.Y + position_p1.Height * 0.1f));
                 spriteBatch.DrawString(_font, "Health: " + Player1.Health, p1_pos, Color.White);
+
+                #region Ammo
+                Weapon weapon = Player1.GetChildren<Weapon>();
+
+                if( weapon != null )
+                {
+                    p1_pos += Vector2.UnitY * 30;
+                    spriteBatch.Draw(_ammoLight, p1_pos, null, weapon.SelectedType == AmmoType.Light ? Color.White : Color.Black, 0f, Vector2.Zero, Vector2.One * 4, SpriteEffects.None, 0f);
+                    p1_pos +=Vector2.UnitX * 30;
+                    spriteBatch.DrawString(_font, "-", p1_pos, Color.White);
+
+                    p1_pos += Vector2.UnitX * 30;
+                    spriteBatch.Draw(_ammoMedium, p1_pos, null, weapon.SelectedType == AmmoType.Medium ? Color.White : Color.Black, 0f, Vector2.Zero, Vector2.One * 4, SpriteEffects.None, 0f);
+                    p1_pos += Vector2.UnitX * 30;
+                    spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Medium].ToString(), p1_pos, Color.White);
+
+                    p1_pos += Vector2.UnitX * 30;
+                    spriteBatch.Draw(_ammoHeavy, p1_pos, null, weapon.SelectedType == AmmoType.Heavy ? Color.White : Color.Black, 0f, Vector2.Zero, Vector2.One * 4, SpriteEffects.None, 0f);
+                    p1_pos += Vector2.UnitX * 30;
+                    spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Heavy].ToString(), p1_pos, Color.White);
+
+                }
+                #endregion Ammo
             }
             #endregion Player 1
 
@@ -66,8 +97,6 @@ namespace GearArena.GUI
             spriteBatch.DrawString(_font, Math.Abs(Math.Round(GlobalForces.Gravity.X + GlobalForces.Gravity.Y, 1, MidpointRounding.AwayFromZero)) + " m/s", arrow_pos + new Vector2(40, -16), Color.White);
             #endregion Gravity
 
-
-
             #endregion Center
 
             #region Player 2
@@ -77,6 +106,29 @@ namespace GearArena.GUI
             {
                 Vector2 p2_pos = new Vector2((float)(position_p2.X + position_p2.Width * 0.1f), (float)(position_p2.Y + position_p2.Height * 0.1f));
                 spriteBatch.DrawString(_font, "Health: " + Player2.Health, p2_pos, Color.White);
+
+                #region Ammo
+                Weapon weapon = Player2.GetChildren<Weapon>();
+
+                if (weapon != null)
+                {
+                    p2_pos += Vector2.UnitY * 30;
+                    spriteBatch.Draw(_ammoLight, p2_pos, null, weapon.SelectedType == AmmoType.Light ? Color.White : Color.Black, 0f, Vector2.Zero, Vector2.One * 4, SpriteEffects.None, 0f);
+                    p2_pos += Vector2.UnitX * 30;
+                    spriteBatch.DrawString(_font, "-", p2_pos, Color.White);
+
+                    p2_pos += Vector2.UnitX * 30;
+                    spriteBatch.Draw(_ammoMedium, p2_pos, null, weapon.SelectedType == AmmoType.Medium ? Color.White : Color.Black, 0f, Vector2.Zero, Vector2.One * 4, SpriteEffects.None, 0f);
+                    p2_pos += Vector2.UnitX * 30;
+                    spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Medium].ToString(), p2_pos, Color.White);
+
+                    p2_pos += Vector2.UnitX * 30;
+                    spriteBatch.Draw(_ammoHeavy, p2_pos, null, weapon.SelectedType == AmmoType.Heavy ? Color.White : Color.Black, 0f, Vector2.Zero, Vector2.One * 4, SpriteEffects.None, 0f);
+                    p2_pos += Vector2.UnitX * 30;
+                    spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Heavy].ToString(), p2_pos, Color.White);
+
+                }
+                #endregion Ammo
             }
             #endregion Player 2
         }

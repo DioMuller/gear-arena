@@ -18,8 +18,6 @@ namespace GearArena.Entities
         #region Properties
         public Level Level { get; private set; }
         public int Health { get; private set; }
-        public Dictionary<AmmoType, int> Ammo { get; private set; }
-        public AmmoType SelectedType { get; private set; }
 
         public bool Mirrored
         {
@@ -47,11 +45,6 @@ namespace GearArena.Entities
 
             Sprite.Animations.Add( new Animation("idle", 0, 0, 0) );
             Sprite.Animations.Add( new Animation("walking", 0, 0, 3) );
-
-            Ammo = new Dictionary<AmmoType,int>();
-            Ammo.Add(AmmoType.Light, -1);
-            Ammo.Add(AmmoType.Medium, 5);
-            Ammo.Add(AmmoType.Heavy, 3);
 
             Sprite.ChangeAnimation(0);
 
