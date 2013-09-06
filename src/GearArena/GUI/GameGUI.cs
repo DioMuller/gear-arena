@@ -75,6 +75,14 @@ namespace GearArena.GUI
                     p1_pos += Vector2.UnitX * 30;
                     spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Heavy].ToString(), p1_pos, Color.White);
 
+                    #region Force
+                    p1_pos += new Vector2(-180, 50);
+                    Rectangle powerbar = new Rectangle((int) p1_pos.X, (int) p1_pos.Y, 300, 40);
+                    spriteBatch.Draw(_background, powerbar, Color.Black);
+                    powerbar = new Rectangle((int)p1_pos.X, (int)p1_pos.Y, (int) (300 * weapon.Force), 40);
+                    spriteBatch.Draw(_background, powerbar, Color.Red);
+                    spriteBatch.DrawString(_font, "POWER", p1_pos, Color.White);
+                    #endregion Force
                 }
                 #endregion Ammo
             }
@@ -127,6 +135,14 @@ namespace GearArena.GUI
                     p2_pos += Vector2.UnitX * 30;
                     spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Heavy].ToString(), p2_pos, Color.White);
 
+                    #region Force
+                    p2_pos += new Vector2(-180, 50);
+                    Rectangle powerbar = new Rectangle((int)p2_pos.X, (int)p2_pos.Y, 300, 40);
+                    spriteBatch.Draw(_background, powerbar, Color.Black);
+                    powerbar = new Rectangle((int)p2_pos.X, (int)p2_pos.Y, (int)(300 * weapon.Force), 40);
+                    spriteBatch.Draw(_background, powerbar, Color.Red);
+                    spriteBatch.DrawString(_font, "POWER", p2_pos, Color.White);
+                    #endregion Force
                 }
                 #endregion Ammo
             }

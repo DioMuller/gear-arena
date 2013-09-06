@@ -16,7 +16,8 @@ namespace GearArena.Behaviors
         #region Attributes
         private GenericInput _input;
         private bool _ready;
-        private bool _onHold;
+        private bool _onHoldP;
+        private bool _onHoldN;
         #endregion Attributes
 
         #region Constructors
@@ -25,7 +26,7 @@ namespace GearArena.Behaviors
         {
             _input = input;
             _ready = false;
-            _onHold = false;
+            _onHoldP = _onHoldN = false;
         }
         #endregion Constructors
 
@@ -71,12 +72,13 @@ namespace GearArena.Behaviors
             if( _input.LeftBumper == ButtonState.Pressed )
             {
                 _ready = true;
+                weapon.ChangeForce();
             }
             else if( _ready )
             {
                 if (weapon != null)
                 {
-                    weapon.Shoot(30f);
+                    weapon.Shoot();
 
                     (Entity as Player).Level.ChangeState(TurnState.Shooting);
                 }
@@ -86,27 +88,28 @@ namespace GearArena.Behaviors
 
             if (_input.FaceButtonB == ButtonState.Pressed)
             {
-                if( !_onHold )
+                if( !_onHoldP )
                 {
                     weapon.PrevAmmo();
-                    _onHold = true;
+                    _onHoldP = true;
                 }
             }
             else
             {
-                _onHold = false;
+                _onHoldP = false;
             }
 
             if (_input.FaceButtonX == ButtonState.Pressed)
             {
-                if( !_onHold )
+                if( !_onHoldN )
                 {
                     weapon.NextAmmo();
+                    _onHoldN = true;
                 }
             }
             else
             {
-                _onHold = false;
+                _onHoldN = false;
             }
         }
         #endregion Methods

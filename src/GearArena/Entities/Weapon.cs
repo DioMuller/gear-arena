@@ -12,11 +12,18 @@ namespace GearArena.Entities
     class Weapon : Entity
     {
         #region Constants
-        private static Vector2 ParentCenter = new Vector2(16, 16);
+        private static Vector2 ParentCenter = new Vector2(0, 0);
+        #endregion Constants
 
+        #region Attributes
+        private float _diff = 0.01f;
+        #endregion Attributes
+
+        #region Properties
         public Dictionary<AmmoType, int> Ammo { get; private set; }
         public AmmoType SelectedType { get; private set; }
-        #endregion Constants
+        public float Force { get; private set; }
+        #endregion Properties
 
         #region Constructor
         public Weapon() : base()
@@ -25,6 +32,8 @@ namespace GearArena.Entities
             Sprite.Origin = new Vector2(6, 24);
             Sprite.Animations.Add(new Animation("single", 0, 0, 0));
             Sprite.ChangeAnimation(0);
+
+            Force = 0f;
 
             Ammo = new Dictionary<AmmoType, int>();
             Ammo.Add(AmmoType.Light, -1);
@@ -47,14 +56,14 @@ namespace GearArena.Entities
             SelectedType = SelectedType != AmmoType.Heavy? (AmmoType) (type - 1) : AmmoType.Heavy;
         }
 
-        public void Shoot(float force_n)
+        public void Shoot()
         {
             if( Ammo[SelectedType] > 0 || Ammo[SelectedType] == -1 )
             {
                 if (this.Parent is Player)
                 {
                     Vector2 direction = new Vector2(0, -1).RotateRadians(Rotation);
-                    Vector2 force = direction * force_n;
+                    Vector2 force = direction * 100f * Force;
                     Ammo ammo = new Ammo((this.Parent as Player).Level, force, SelectedType) { Parent = this };
 
                     Vector2 positionCentered = (Parent.Position + ParentCenter); //Weapon origin position.
@@ -69,6 +78,22 @@ namespace GearArena.Entities
                         Ammo[SelectedType]--; //Used one ammo
                     }
                 }
+            }
+        }
+
+        public void ChangeForce()
+        {
+            Force += _diff;
+
+            if( Force < 0f )
+            {
+                Force = 0f;
+                _diff *= -1;
+            }
+            else if( Force > 1f )
+            {
+                Force = 1f;
+                _diff *= -1;
             }
         }
         #endregion Methods
