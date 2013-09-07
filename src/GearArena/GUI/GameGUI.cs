@@ -76,15 +76,34 @@ namespace GearArena.GUI
                     spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Heavy].ToString(), p1_pos, Color.White);
 
                     #region Force
-                    p1_pos += new Vector2(-180, 50);
-                    Rectangle powerbar = new Rectangle((int) p1_pos.X, (int) p1_pos.Y, 300, 40);
+                    p1_pos += new Vector2(-155, 50);
+                    Rectangle powerbar = new Rectangle((int) p1_pos.X, (int) p1_pos.Y, 175, 40);
                     spriteBatch.Draw(_background, powerbar, Color.Black);
-                    powerbar = new Rectangle((int)p1_pos.X, (int)p1_pos.Y, (int) (300 * weapon.Force), 40);
+                    powerbar = new Rectangle((int)p1_pos.X, (int)p1_pos.Y, (int) (175 * weapon.Force), 40);
                     spriteBatch.Draw(_background, powerbar, Color.Red);
-                    spriteBatch.DrawString(_font, "POWER", p1_pos, Color.White);
+                    spriteBatch.DrawString(_font, " POWER", p1_pos, Color.White);
                     #endregion Force
                 }
                 #endregion Ammo
+
+                #region Fuel
+                p1_pos += new Vector2(190, -80);
+                Rectangle fuelbar = new Rectangle((int)p1_pos.X, (int)p1_pos.Y, 40, 120);
+                float offset = 120f * ((float)Player1.Fuel / 100f);
+                spriteBatch.Draw(_background, fuelbar, Color.Black);
+                Rectangle fullbar = new Rectangle((int)p1_pos.X, (int)(p1_pos.Y + 120f - offset), 40, (int)offset);
+                spriteBatch.Draw(_background, fullbar, Color.Maroon);
+
+                p1_pos += Vector2.UnitY * 10;
+                spriteBatch.DrawString(_font, " F", p1_pos, Color.White);
+                p1_pos += Vector2.UnitY * 20;
+                spriteBatch.DrawString(_font, " U", p1_pos, Color.White);
+                p1_pos += Vector2.UnitY * 20;
+                spriteBatch.DrawString(_font, " E", p1_pos, Color.White);
+                p1_pos += Vector2.UnitY * 20;
+                spriteBatch.DrawString(_font, " L", p1_pos, Color.White);
+
+                #endregion Fuel
             }
             #endregion Player 1
 
@@ -136,15 +155,34 @@ namespace GearArena.GUI
                     spriteBatch.DrawString(_font, weapon.Ammo[AmmoType.Heavy].ToString(), p2_pos, Color.White);
 
                     #region Force
-                    p2_pos += new Vector2(-180, 50);
-                    Rectangle powerbar = new Rectangle((int)p2_pos.X, (int)p2_pos.Y, 300, 40);
+                    p2_pos += new Vector2(-155, 50);
+                    Rectangle powerbar = new Rectangle((int)p2_pos.X, (int)p2_pos.Y, 175, 40);
                     spriteBatch.Draw(_background, powerbar, Color.Black);
-                    powerbar = new Rectangle((int)p2_pos.X, (int)p2_pos.Y, (int)(300 * weapon.Force), 40);
+                    powerbar = new Rectangle((int)p2_pos.X, (int)p2_pos.Y, (int)(175 * weapon.Force), 40);
                     spriteBatch.Draw(_background, powerbar, Color.Red);
-                    spriteBatch.DrawString(_font, "POWER", p2_pos, Color.White);
+                    spriteBatch.DrawString(_font, " POWER", p2_pos, Color.White);
                     #endregion Force
                 }
                 #endregion Ammo
+
+                #region Fuel
+                p2_pos += new Vector2(190, -80);
+                Rectangle fuelbar = new Rectangle((int) p2_pos.X, (int) p2_pos.Y, 40, 120);
+                float offset = 120f * ((float) Player2.Fuel/100f);
+                spriteBatch.Draw(_background, fuelbar, Color.Black);
+                Rectangle fullbar = new Rectangle((int) p2_pos.X, (int) (p2_pos.Y + 120f - offset), 40, (int) offset);
+                spriteBatch.Draw(_background, fullbar, Color.Maroon);
+
+                p2_pos += Vector2.UnitY * 10;
+                spriteBatch.DrawString(_font, " F", p2_pos, Color.White);
+                p2_pos += Vector2.UnitY * 20;
+                spriteBatch.DrawString(_font, " U", p2_pos, Color.White);
+                p2_pos += Vector2.UnitY * 20;
+                spriteBatch.DrawString(_font, " E", p2_pos, Color.White);
+                p2_pos += Vector2.UnitY * 20;
+                spriteBatch.DrawString(_font, " L", p2_pos, Color.White);
+
+                #endregion Fuel
             }
             #endregion Player 2
         }

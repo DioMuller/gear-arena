@@ -45,10 +45,15 @@ namespace GearArena.Behaviors
 
             if (direction.X != 0f)
             {
-                Entity.Sprite.ChangeAnimation(1);
+                
                 (Entity as Player).Mirrored = (direction.X < 0f);
                 Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = new Vector2(direction.X * 100f, 0f);
-                SoundManager.PlaySound("Walk");
+
+                if (!(Entity as Player).IsFlying) 
+                {
+                    Entity.Sprite.ChangeAnimation(1); 
+                    SoundManager.PlaySound("Walk");
+                }
             }
             else
             {
@@ -65,14 +70,16 @@ namespace GearArena.Behaviors
                 }
             }
 
-            if( _input.FaceButtonA == ButtonState.Pressed )
+            if( _input.FaceButtonA == ButtonState.Pressed && (Entity as Player).Fuel > 0 )
             {
                 (Entity as Player).GetBehavior<PhysicsBehavior>().ConstantForces["Propulsion"] = new Vector2(0f, -2000f);
+                (Entity as Player).IsFlying = true;
                 SoundManager.PlaySound("Jetpack");
             }
             else
             {
                 (Entity as Player).GetBehavior<PhysicsBehavior>().ConstantForces["Propulsion"] = new Vector2(0f, 0f);
+                (Entity as Player).IsFlying = false;
             }
 
             if( _input.LeftBumper == ButtonState.Pressed )
