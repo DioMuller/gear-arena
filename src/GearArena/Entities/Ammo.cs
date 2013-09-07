@@ -9,6 +9,7 @@ using MonoGameLib.Core.Entities;
 using MonoGameLib.Core.Sprites;
 using MonoGameLib.Core.Particles;
 using MonoGameLib.Core.Extensions;
+using MonoGameLib.Core;
 
 namespace GearArena.Entities
 {
@@ -123,6 +124,8 @@ namespace GearArena.Entities
             _particles.DecayTime = 1000f;
             GetBehavior<PhysicsBehavior>().IsActive = false;
             GetBehavior<CollidableBehavior>().IsActive = false;
+
+            SoundManager.PlaySound("Explosion");
 
             #region Create Explosion
             List<ParticleState> particleStates = new List<ParticleState>();

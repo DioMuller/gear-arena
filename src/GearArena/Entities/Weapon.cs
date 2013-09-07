@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using MonoGameLib.Core.Entities;
 using MonoGameLib.Core.Sprites;
 using MonoGameLib.Core.Extensions;
+using MonoGameLib.Core;
 
 namespace GearArena.Entities
 {
@@ -56,7 +57,7 @@ namespace GearArena.Entities
             SelectedType = SelectedType != AmmoType.Heavy? (AmmoType) (type - 1) : AmmoType.Heavy;
         }
 
-        public void Shoot()
+        public bool Shoot()
         {
             if( Ammo[SelectedType] > 0 || Ammo[SelectedType] == -1 )
             {
@@ -78,7 +79,11 @@ namespace GearArena.Entities
                         Ammo[SelectedType]--; //Used one ammo
                     }
                 }
+
+                return true;
             }
+
+            return false;
         }
 
         public void ChangeForce()

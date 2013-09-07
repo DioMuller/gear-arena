@@ -6,6 +6,7 @@ using GearArena.Components;
 using GearArena.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoGameLib.Core;
 using MonoGameLib.Core.Entities;
 using MonoGameLib.Core.Input;
 
@@ -40,11 +41,14 @@ namespace GearArena.Behaviors
             Vector2 direction = _input.LeftDirectional;
             Weapon weapon = Entity.GetChildren<Weapon>();
 
+            if( (Entity as Player).Mirrored ) direction.Y *= -1;
+
             if (direction.X != 0f)
             {
                 Entity.Sprite.ChangeAnimation(1);
                 (Entity as Player).Mirrored = (direction.X < 0f);
                 Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = new Vector2(direction.X * 100f, 0f);
+                SoundManager.PlaySound("Walk");
             }
             else
             {
@@ -57,12 +61,14 @@ namespace GearArena.Behaviors
                 if( weapon != null )
                 {
                     weapon.Rotation += (direction.Y / 10f) % 2f;
+                    SoundManager.PlaySound("RotateWeapon");
                 }
             }
 
             if( _input.FaceButtonA == ButtonState.Pressed )
             {
                 (Entity as Player).GetBehavior<PhysicsBehavior>().ConstantForces["Propulsion"] = new Vector2(0f, -2000f);
+                SoundManager.PlaySound("Jetpack");
             }
             else
             {
@@ -78,9 +84,15 @@ namespace GearArena.Behaviors
             {
                 if (weapon != null)
                 {
-                    weapon.Shoot();
-
-                    (Entity as Player).Level.ChangeState(TurnState.Shooting);
+                    if( weapon.Shoot() )
+                    {
+                        (Entity as Player).Level.ChangeState(TurnState.Shooting);
+                        SoundManager.PlaySound("Shoot");
+                    }
+                    else
+                    {
+                        SoundManager.PlaySound("NoAmmo");
+                    }
                 }
 
                 _ready = false;
