@@ -96,6 +96,12 @@
     <Content Include="Content\audio\bgm\Wah Game Loop.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\audio\se\Explosion.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\audio\se\Launch.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\gui\arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
