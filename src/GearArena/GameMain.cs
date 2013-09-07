@@ -114,7 +114,7 @@ namespace GearArena
             base.Draw(gameTime);
         }
 
-        public void ChangeState(GameState state, object message = null)
+        public void ChangeState(GameState state, object obj = null)
         {
             switch( state )
             {
@@ -122,6 +122,8 @@ namespace GearArena
                     _level = new Level(this);
                     break;
                 case GameState.GameOver:
+                    _gameOver.Text = (obj as Player).Tag + " is the winner!";
+                    _gameOver.Background = (obj as Player).Color;
                     break;
             }
 

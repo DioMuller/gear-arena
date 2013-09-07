@@ -60,8 +60,8 @@ namespace GearArena.Components
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
-            Player player = new Player(this, new Vector2(100f, 100f), Color.Yellow);
-            Player player2 = new Player(this, new Vector2(500f, 100f), Color.CornflowerBlue);
+            Player player = new Player(this, new Vector2(100f, 100f), Color.Yellow) { Tag = "Player 1" };
+            Player player2 = new Player(this, new Vector2(500f, 100f), Color.CornflowerBlue) { Tag = "Player 2" };
 
             Players.Add(player);
             Players.Add(player2);
@@ -152,7 +152,7 @@ namespace GearArena.Components
 
         public void FinishLevel(Player loser)
         {
-            _game.ChangeState(GameState.GameOver);
+            _game.ChangeState(GameState.GameOver, Players.Where( (p) => p!= loser).First());
         }
         #endregion Public Methods
 

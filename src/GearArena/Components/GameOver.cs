@@ -11,6 +11,18 @@ namespace GearArena.Components
 {
     public class GameOver : Window
     {
+        public string Text 
+        {
+            get
+            {
+                return Container.Children.OfType<Label>().First().Text;
+            }
+            set
+            {
+                Container.Children.OfType<Label>().First().Text = value;
+            }
+        }
+
         public GameOver(Game game)
             : base(game)
         {
@@ -18,7 +30,7 @@ namespace GearArena.Components
 
             Container = new Canvas(new Point(rect.X, rect.Y), new Point(rect.Width, rect.Height));
 
-            Container.AddChildren(new Label("Game Over", "fonts/DefaultFont") { PercentPosition = new Vector2(.5f, .5f), HorizontalOrigin = HorizontalAlign.Center, VerticalOrigin = VerticalAlign.Middle, Color = Color.Wheat});
+            Container.AddChildren(new Label(String.Empty, "fonts/DefaultFont") { PercentPosition = new Vector2(.5f, .5f), HorizontalOrigin = HorizontalAlign.Center, VerticalOrigin = VerticalAlign.Middle, Color = Color.Black});
         }
     }
 }
