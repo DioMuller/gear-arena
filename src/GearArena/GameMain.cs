@@ -37,8 +37,8 @@ namespace GearArena
         {
             _graphics = new GraphicsDeviceManager(this);
 
-            _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 600;
             _graphics.IsFullScreen = false;
 
             _graphics.ApplyChanges();

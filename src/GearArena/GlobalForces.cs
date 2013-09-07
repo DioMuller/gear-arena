@@ -12,7 +12,7 @@ namespace GearArena
         /// <summary>
         /// Pixels per Meter.
         /// </summary>
-        private const float PPM = 4f;
+        private const float PPM = 8f;
 
         /// <summary>
         /// Meters per Pixel.

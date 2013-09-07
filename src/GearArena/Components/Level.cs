@@ -118,7 +118,7 @@ namespace GearArena.Components
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone, null, Matrix.CreateScale(2f));
+            _spriteBatch.Begin();
             _map.Draw(gameTime, _spriteBatch, Vector2.Zero);
 
             foreach (Player en in Players)
