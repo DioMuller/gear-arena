@@ -60,8 +60,8 @@ namespace GearArena.Components
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
-            Player player = new Player(this, new Vector2(100f, 100f));
-            Player player2 = new Player(this, new Vector2(500f, 100f));
+            Player player = new Player(this, new Vector2(100f, 100f), Color.Yellow);
+            Player player2 = new Player(this, new Vector2(500f, 100f), Color.CornflowerBlue);
 
             Players.Add(player);
             Players.Add(player2);

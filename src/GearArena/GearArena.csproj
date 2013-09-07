@@ -46,7 +46,6 @@
     <Compile Include="Components\Level.cs" />
     <Compile Include="GlobalForces.cs" />
     <Compile Include="GUI\GameGUI.cs" />
-    <Compile Include="GUI\PlayerGUI.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\ParticleEmiter.cs" />
     <Compile Include="Particles\ParticleState.cs" />

@@ -48,7 +48,7 @@ namespace GearArena.GUI
             Rectangle position_p2 = new Rectangle((int) (window.Width * 0.6), (int)(window.Height * .8f), (int)(window.Width * 0.4f), window.Height / 5);
 
             #region Player 1
-            spriteBatch.Draw(_background, position_p1, Color.DarkGray);
+            spriteBatch.Draw(_background, position_p1, Player1.Color);
 
             if (Player1 != null)
             {
@@ -108,7 +108,7 @@ namespace GearArena.GUI
             #endregion Center
 
             #region Player 2
-            spriteBatch.Draw(_background, position_p2, Color.DarkGray);
+            spriteBatch.Draw(_background, position_p2, Player2.Color);
 
             if (Player2 != null)
             {

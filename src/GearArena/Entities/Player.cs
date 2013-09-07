@@ -33,9 +33,11 @@ namespace GearArena.Entities
         #endregion Properties
 
         #region Constructor
-        public Player(Level level, Vector2 position) : base()
+        public Player(Level level, Vector2 position, Color color) : base()
         {
             Level = level;
+
+            Color = color;
 
             Health = 100;
 
@@ -52,7 +54,7 @@ namespace GearArena.Entities
             Behaviors.Add(new CollidableBehavior(this, level));
             Behaviors.Add(new PhysicsBehavior(this) { Mass = 10f, Rotate = false, Gravity = new Vector2(0f, 9.8f), Friction = new Vector2(0.01f, 0f) });
             
-            Children.Add(new Weapon() { Parent = this, Position = new Vector2(0,0), FollowParent = true } );
+            Children.Add(new Weapon() { Parent = this, Position = new Vector2(0,0), FollowParent = true, Color = this.Color } );
         }
         #endregion Constructor
 
