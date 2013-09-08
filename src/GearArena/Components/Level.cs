@@ -75,7 +75,7 @@ namespace GearArena.Components
 
         public override void Update(GameTime gameTime)
         {
-            SoundManager.PlayBGM("Cold Funk");
+            SoundManager.PlayBGM("Take the Lead");
 
             switch( _currentState )
             {

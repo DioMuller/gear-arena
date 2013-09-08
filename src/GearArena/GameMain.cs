@@ -18,6 +18,7 @@ namespace GearArena
 {
     public enum GameState
     {
+        Title,
         Playing,
         GameOver
     }
@@ -29,6 +30,7 @@ namespace GearArena
     {
         private GraphicsDeviceManager _graphics;
 
+        private TitleScreen _titleScreen;
         private Level _level;
         private GameOver _gameOver;
 
@@ -68,17 +70,15 @@ namespace GearArena
         /// </summary>
         protected override void LoadContent()
         {
+            _titleScreen = new TitleScreen(this);
             _level = new Level(this);
             _gameOver = new GameOver(this);
 
+            Components.Add(_titleScreen);
             Components.Add(_level);
             Components.Add(_gameOver);
 
-            _level.Enabled = true;
-            _level.Visible = true;
-
-            _gameOver.Enabled = false;
-            _gameOver.Visible = false;
+            ChangeState(GameState.Title);
 
             GlobalForces.Gravity = new Vector2(0.0f, 9.8f);
         }
@@ -118,14 +118,22 @@ namespace GearArena
         {
             switch( state )
             {
+                case GameState.Title:
+                    _titleScreen.WaitNext = true; //So Enter doesn't skip directly to the Playing state.
+                    break;
                 case GameState.Playing:
+                    Components.Remove(_level);
                     _level = new Level(this);
+                    Components.Add(_level);
                     break;
                 case GameState.GameOver:
                     _gameOver.Text = (obj as Player).Tag + " is the winner!";
                     _gameOver.Background = (obj as Player).Color;
                     break;
             }
+
+            _titleScreen.Enabled = (state == GameState.Title);
+            _titleScreen.Visible = (state == GameState.Title);
 
             _level.Enabled = (state == GameState.Playing);
             _level.Visible = (state == GameState.Playing);

@@ -38,6 +38,7 @@
     <Compile Include="Behaviors\ControllableBehavior.cs" />
     <Compile Include="Behaviors\PhysicsBehavior.cs" />
     <Compile Include="Behaviors\CollidableBehavior.cs" />
+    <Compile Include="Components\TitleScreen.cs" />
     <Compile Include="Components\GameOver.cs" />
     <Compile Include="Entities\Ammo.cs" />
     <Compile Include="Entities\Player.cs" />
@@ -77,16 +78,7 @@
       <Link>SDL.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\audio\bgm\Cold Funk.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\audio\bgm\Exhilarate.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Neolith.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\audio\bgm\Summon the Rawk.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\audio\bgm\Take the Lead.wav">
@@ -111,6 +103,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\audio\se\Walk.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\images\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\images\gui\arrow.png">
@@ -207,6 +202,9 @@
     <Content Include="Content\data\tilesets\tiles_floor.tsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GUI\Legacy\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
