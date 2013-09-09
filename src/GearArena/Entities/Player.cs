@@ -112,10 +112,6 @@ namespace GearArena.Entities
             base.Draw(gameTime, spriteBatch);
 
             _particles.Draw(gameTime, spriteBatch);
-
-            if( IsFlying )
-            {
-            }
         }
 
         public void Hit(int health)
