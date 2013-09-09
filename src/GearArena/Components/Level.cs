@@ -34,6 +34,13 @@ namespace GearArena.Components
         private int _currentPlayer;
         private GameMain _game;
         private GameGUI _gui;
+
+        private Texture2D _background;
+        private Texture2D _clouds;
+
+        private Vector2 _cloudPosition;
+        private Vector2 _cloudSize;
+        private Vector2 _cloudOffset;
         #endregion Attributes
 
         #region Properties
@@ -46,6 +53,12 @@ namespace GearArena.Components
             _game = game as GameMain;
             _gui = new GameGUI();
 
+            _background = GameContent.LoadContent<Texture2D>("images/backgrounds/background.png");
+            _clouds = GameContent.LoadContent<Texture2D>("images/backgrounds/clouds.png");
+
+            _cloudPosition = Vector2.Zero;
+            _cloudSize = new Vector2(_clouds.Width, _clouds.Height);
+            _cloudOffset = Vector2.UnitX * _cloudSize.X;
         }
         #endregion Constructor
 
@@ -61,7 +74,7 @@ namespace GearArena.Components
 
             _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
             Player player = new Player(this, new Vector2(100f, 100f), Color.Yellow) { Tag = "Player 1" };
-            Player player2 = new Player(this, new Vector2(500f, 100f), Color.CornflowerBlue) { Tag = "Player 2" };
+            Player player2 = new Player(this, new Vector2(500f, 100f), Color.LightBlue) { Tag = "Player 2" };
 
             Players.Add(player);
             Players.Add(player2);
@@ -76,6 +89,11 @@ namespace GearArena.Components
         public override void Update(GameTime gameTime)
         {
             SoundManager.PlayBGM("Take the Lead");
+
+            _cloudPosition += GlobalForces.Wind;
+
+            if( _cloudPosition.X > _cloudSize.X ) _cloudPosition.X -= _cloudSize.X;
+            else if (_cloudPosition.X < 0)  _cloudPosition.X += _cloudSize.X;
 
             switch( _currentState )
             {
@@ -119,6 +137,13 @@ namespace GearArena.Components
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
+
+            _spriteBatch.Draw(_background, Vector2.Zero, Color.White);
+
+            _spriteBatch.Draw(_clouds, _cloudPosition, Color.White);
+
+            _spriteBatch.Draw(_clouds, _cloudPosition - _cloudOffset, Color.White);
+
             _map.Draw(gameTime, _spriteBatch, Vector2.Zero);
 
             foreach (Player en in Players)

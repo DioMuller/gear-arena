@@ -111,14 +111,14 @@ namespace GearArena.GUI
             spriteBatch.Draw(_background, position_cn, Color.White);
 
             #region Wind
-            Vector2 arrow_pos = new Vector2( (float) (position_cn.X + position_cn.Width * 0.2f), (float) (position_cn.Y + position_cn.Height * 0.2f) );
+            Vector2 arrow_pos = new Vector2( (float) (position_cn.X + position_cn.Width * 0.18f), (float) (position_cn.Y + position_cn.Height * 0.3f) );
             spriteBatch.Draw(_arrow, arrow_pos, null, Color.CornflowerBlue, GlobalForces.Wind.GetAngle(), new Vector2(16, 16), 1f, SpriteEffects.None, 0f); 
             spriteBatch.DrawString(_font, "W", arrow_pos + new Vector2(-8,-16), Color.White);
             spriteBatch.DrawString(_font, Math.Abs(Math.Round(GlobalForces.Wind.X + GlobalForces.Wind.Y, 1, MidpointRounding.AwayFromZero)) + " m/s", arrow_pos + new Vector2(40, -16), Color.White);
             #endregion Wind
 
             #region Gravity
-            arrow_pos = new Vector2((float)(position_cn.X + position_cn.Width * 0.2f), (float)(position_cn.Y + position_cn.Height * 0.4f));
+            arrow_pos = new Vector2((float)(position_cn.X + position_cn.Width * 0.18f), (float)(position_cn.Y + position_cn.Height * 0.6f));
             spriteBatch.Draw(_arrow, arrow_pos, null, Color.DarkRed, GlobalForces.Gravity.GetAngle(), new Vector2(16, 16), 1f, SpriteEffects.None, 0f);
             spriteBatch.DrawString(_font, "G", arrow_pos + new Vector2(-8, -16), Color.White);
             spriteBatch.DrawString(_font, Math.Abs(Math.Round(GlobalForces.Gravity.X + GlobalForces.Gravity.Y, 1, MidpointRounding.AwayFromZero)) + " m/s", arrow_pos + new Vector2(40, -16), Color.White);
