@@ -57,6 +57,11 @@ namespace GearArena.Entities
             SelectedType = SelectedType != AmmoType.Heavy? (AmmoType) (type - 1) : AmmoType.Heavy;
         }
 
+        public void SelectAmmo(AmmoType type)
+        {
+            SelectedType = type;
+        }
+
         public bool Shoot()
         {
             if( Ammo[SelectedType] > 0 || Ammo[SelectedType] == -1 )

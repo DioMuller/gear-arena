@@ -62,7 +62,7 @@ namespace GearArena.Entities
 
             Sprite.ChangeAnimation(0);
 
-            Behaviors.Add(new ControllableBehavior(this, new KeyboardInput()));
+            Behaviors.Add(new ControllableBehavior(this, new CustomKeyboardInput()));
             Behaviors.Add(new CollidableBehavior(this, level));
             Behaviors.Add(new PhysicsBehavior(this) { Mass = 10f, Rotate = false, Gravity = new Vector2(0f, 9.8f), Friction = new Vector2(0.01f, 0f) });
             

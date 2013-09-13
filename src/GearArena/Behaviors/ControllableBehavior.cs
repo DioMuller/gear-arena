@@ -39,6 +39,7 @@ namespace GearArena.Behaviors
         public override void Update(GameTime gameTime)
         {
             Vector2 direction = _input.LeftDirectional;
+            Vector2 angle = _input.RightDirectional;
             Weapon weapon = Entity.GetChildren<Weapon>();
 
             if( (Entity as Player).Mirrored ) direction.Y *= -1;
@@ -61,7 +62,7 @@ namespace GearArena.Behaviors
                 Entity.GetBehavior<PhysicsBehavior>().ConstantForces["Accelerator"] = Vector2.Zero;
             }
 
-            if( direction.Y != 0f )
+            if (angle.Y != 0f)
             {
                 if( weapon != null )
                 {
@@ -70,7 +71,7 @@ namespace GearArena.Behaviors
                 }
             }
 
-            if( _input.FaceButtonA == ButtonState.Pressed && (Entity as Player).Fuel > 0 )
+            if( _input.LeftTrigger > 0.4f && (Entity as Player).Fuel > 0 )
             {
                 (Entity as Player).GetBehavior<PhysicsBehavior>().ConstantForces["Propulsion"] = new Vector2(0f, -2000f);
                 (Entity as Player).IsFlying = true;
@@ -82,7 +83,7 @@ namespace GearArena.Behaviors
                 (Entity as Player).IsFlying = false;
             }
 
-            if( _input.LeftBumper == ButtonState.Pressed )
+            if( _input.RightTrigger > 0.4f )
             {
                 _ready = true;
                 weapon.ChangeForce();
@@ -105,7 +106,7 @@ namespace GearArena.Behaviors
                 _ready = false;
             }
 
-            if (_input.FaceButtonB == ButtonState.Pressed)
+            if (_input.LeftBumper == ButtonState.Pressed)
             {
                 if( !_onHoldP )
                 {
@@ -118,7 +119,7 @@ namespace GearArena.Behaviors
                 _onHoldP = false;
             }
 
-            if (_input.FaceButtonX == ButtonState.Pressed)
+            if (_input.RightBumper == ButtonState.Pressed)
             {
                 if( !_onHoldN )
                 {
@@ -129,6 +130,19 @@ namespace GearArena.Behaviors
             else
             {
                 _onHoldN = false;
+            }
+
+            if( _input.DirectionLeft == ButtonState.Pressed )
+            {
+                weapon.SelectAmmo(AmmoType.Light);
+            }
+            if (_input.DirectionUp == ButtonState.Pressed)
+            {
+                weapon.SelectAmmo(AmmoType.Medium);
+            }
+            if (_input.DirectionRight == ButtonState.Pressed)
+            {
+                weapon.SelectAmmo(AmmoType.Heavy);
             }
         }
         #endregion Methods
