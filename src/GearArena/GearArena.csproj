@@ -112,6 +112,7 @@
     <Content Include="Content\images\backgrounds\clouds.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\images\controls.png" />
     <Content Include="Content\images\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
