@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GearArena.Components
 {
-    public class TitleScreen : Window
+    public class Controls : Window
     {
         public bool WaitNext { get; set; }
 
@@ -27,17 +27,14 @@ namespace GearArena.Components
             }
         }
 
-        public TitleScreen(Game game)
+        public Controls(Game game)
             : base(game)
         {
             Rectangle rect = game.Window.ClientBounds;
 
             Container = new Canvas(new Point(rect.X, rect.Y), new Point(rect.Width, rect.Height));
 
-            Container.AddChildren(new Image("images/title.png") { Position = new Point(0,0) });
-            Container.AddChildren(new Label("Press START or ENTER to play", "fonts/DefaultFont") { PercentPosition = new Vector2(.5f, .5f), HorizontalOrigin = HorizontalAlign.Center, VerticalOrigin = VerticalAlign.Middle, Color = Color.White });
-            Container.AddChildren(new Label("Diogo Muller de Miranda", "fonts/DefaultFont") { PercentPosition = new Vector2(.5f, .9f), HorizontalOrigin = HorizontalAlign.Center, VerticalOrigin = VerticalAlign.Middle, Color = Color.White});
-            Container.AddChildren(new Label("Tileset by Melanie Young Yee - Music by Kevin MacLeod", "fonts/DefaultFont") { PercentPosition = new Vector2(.5f, .95f), HorizontalOrigin = HorizontalAlign.Center, VerticalOrigin = VerticalAlign.Middle, Color = Color.White });
+            Container.AddChildren(new Image("images/controls.png") { Position = new Point(0,0) });
         }
 
         public override void Update(GameTime gameTime)
@@ -48,7 +45,7 @@ namespace GearArena.Components
 
             if( GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.Start) || Keyboard.GetState().IsKeyDown(Keys.Enter) )
             {
-                if(!WaitNext) (Game as GameMain).ChangeState(GameState.Tutorial);
+                if(!WaitNext) (Game as GameMain).ChangeState(GameState.Playing);
             }
             else
             {

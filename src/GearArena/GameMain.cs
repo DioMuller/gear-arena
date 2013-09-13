@@ -19,6 +19,7 @@ namespace GearArena
     public enum GameState
     {
         Title,
+        Tutorial,
         Playing,
         GameOver
     }
@@ -31,6 +32,7 @@ namespace GearArena
         private GraphicsDeviceManager _graphics;
 
         private TitleScreen _titleScreen;
+        private Controls _controls;
         private Level _level;
         private GameOver _gameOver;
 
@@ -71,10 +73,12 @@ namespace GearArena
         protected override void LoadContent()
         {
             _titleScreen = new TitleScreen(this);
+            _controls = new Controls(this);
             _level = new Level(this);
             _gameOver = new GameOver(this);
 
             Components.Add(_titleScreen);
+            Components.Add(_controls);
             Components.Add(_level);
             Components.Add(_gameOver);
 
@@ -121,6 +125,9 @@ namespace GearArena
                 case GameState.Title:
                     _titleScreen.WaitNext = true; //So Enter doesn't skip directly to the Playing state.
                     break;
+                case GameState.Tutorial:
+                    _controls.WaitNext = true; //So Enter doesn't skip directly to the Playing state.
+                    break;
                 case GameState.Playing:
                     Components.Remove(_level);
                     _level = new Level(this);
@@ -134,6 +141,9 @@ namespace GearArena
 
             _titleScreen.Enabled = (state == GameState.Title);
             _titleScreen.Visible = (state == GameState.Title);
+
+            _controls.Enabled = (state == GameState.Tutorial);
+            _controls.Visible = (state == GameState.Tutorial);
 
             _level.Enabled = (state == GameState.Playing);
             _level.Visible = (state == GameState.Playing);

@@ -38,6 +38,7 @@
     <Compile Include="Behaviors\ControllableBehavior.cs" />
     <Compile Include="Behaviors\PhysicsBehavior.cs" />
     <Compile Include="Behaviors\CollidableBehavior.cs" />
+    <Compile Include="Components\Controls.cs" />
     <Compile Include="Components\TitleScreen.cs" />
     <Compile Include="Components\GameOver.cs" />
     <Compile Include="Controller\CustomKeyboardInput.cs" />
@@ -112,7 +113,9 @@
     <Content Include="Content\images\backgrounds\clouds.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\images\controls.png" />
+    <Content Include="Content\images\controls.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\images\title.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
