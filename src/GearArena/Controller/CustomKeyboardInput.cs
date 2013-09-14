@@ -34,6 +34,11 @@ namespace MonoGameLib.Core.Input
                 if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left)) direction.X -= 1f;
                 if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right)) direction.X += 1f;
 
+                if (Math.Abs(GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X) > 0.4)
+                {
+                    direction = (direction + GamePad.GetState(PlayerIndex.One).ThumbSticks.Left);
+                    direction.Normalize();
+                }
                 return direction;
             }
         }
@@ -51,6 +56,11 @@ namespace MonoGameLib.Core.Input
                 if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left)) direction.X -= 1f;
                 if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right)) direction.X += 1f;
 
+                if( Math.Abs(GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y )> 0.4 )
+                {
+                    direction = (direction + GamePad.GetState(PlayerIndex.One).ThumbSticks.Right);
+                    direction.Normalize();
+                }
                 return direction;
             }
         }
@@ -62,7 +72,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.D1) ? ButtonState.Pressed : ButtonState.Released;
+                return Keyboard.GetState().IsKeyDown(Keys.D1) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.DPadLeft) ? ButtonState.Pressed : ButtonState.Released;
             }
         }
         /// <summary>
@@ -72,7 +82,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.D3) ? ButtonState.Pressed : ButtonState.Released;
+                return Keyboard.GetState().IsKeyDown(Keys.D3) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.DPadRight) ? ButtonState.Pressed : ButtonState.Released;
             }
         }
         /// <summary>
@@ -82,7 +92,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.D2) ? ButtonState.Pressed : ButtonState.Released;
+                return Keyboard.GetState().IsKeyDown(Keys.D2) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.DPadUp) ? ButtonState.Pressed : ButtonState.Released;
             }
         }
         /// <summary>
@@ -92,7 +102,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.NumPad4) ? ButtonState.Pressed : ButtonState.Released;
+                return Keyboard.GetState().IsKeyDown(Keys.NumPad4) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.DPadDown) ? ButtonState.Pressed : ButtonState.Released;
             }
         }
 
@@ -166,7 +176,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.Q) || Keyboard.GetState().IsKeyDown(Keys.OemComma) ? ButtonState.Pressed : ButtonState.Released;
+                return Keyboard.GetState().IsKeyDown(Keys.Q) || Keyboard.GetState().IsKeyDown(Keys.OemComma) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.LeftShoulder) ? ButtonState.Pressed : ButtonState.Released;
             }
         }
         /// <summary>
@@ -176,7 +186,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.E) || Keyboard.GetState().IsKeyDown(Keys.OemPeriod) ? ButtonState.Pressed : ButtonState.Released;
+                return Keyboard.GetState().IsKeyDown(Keys.E) || Keyboard.GetState().IsKeyDown(Keys.OemPeriod) || GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.RightShoulder) ? ButtonState.Pressed : ButtonState.Released;
             }
         }
 
@@ -209,7 +219,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.LeftShift) ? 1f : 0f;
+                return Math.Max(Keyboard.GetState().IsKeyDown(Keys.LeftShift) ? 1f : 0f, GamePad.GetState(PlayerIndex.One).Triggers.Left);
             }
         }
         /// <summary>
@@ -219,7 +229,7 @@ namespace MonoGameLib.Core.Input
         {
             get
             {
-                return Keyboard.GetState().IsKeyDown(Keys.Space) ? 1f : 0f;
+                return Math.Max(Keyboard.GetState().IsKeyDown(Keys.Space) ? 1f : 0f, GamePad.GetState(PlayerIndex.One).Triggers.Right);
             }
         }
         #endregion Properties

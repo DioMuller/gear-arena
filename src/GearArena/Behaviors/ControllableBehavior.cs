@@ -66,7 +66,7 @@ namespace GearArena.Behaviors
             {
                 if( weapon != null )
                 {
-                    weapon.Rotation += (direction.Y / 10f) % 2f;
+                    weapon.Rotation += (angle.Y / 10f) % 2f;
                     SoundManager.PlaySound("RotateWeapon");
                 }
             }
