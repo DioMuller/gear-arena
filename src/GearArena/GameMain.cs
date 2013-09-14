@@ -24,6 +24,10 @@ namespace GearArena
         GameOver
     }
 
+    //ITEM: d) Cumpriu todos os requisitos funcionais do trabalho;
+    //ITEM: e) Incluiu acabamento: Sons, boas imagens, menu, controles amigáveis, etc.
+    // Estão em todo lugar...
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>

@@ -73,8 +73,10 @@ namespace GearArena.Components
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _map = MapLoader.LoadMap("Content/data/maps/earth01.tmx");
-            Player player = new Player(this, new Vector2(100f, 100f), Color.Yellow) { Tag = "Player 1" };
-            Player player2 = new Player(this, new Vector2(500f, 100f), Color.LightBlue) { Tag = "Player 2" };
+
+            //ITEM: 1. Dois canhões, um em cada lado da tela;
+            Player player = new Player(this, new Vector2(100f, 350f), Color.Yellow) { Tag = "Player 1" };
+            Player player2 = new Player(this, new Vector2(600f, 350f), Color.LightBlue) { Tag = "Player 2" };
 
             Players.Add(player);
             Players.Add(player2);
@@ -124,6 +126,8 @@ namespace GearArena.Components
                         en.GetBehavior<ControllableBehavior>().IsActive = false;
                     }
 
+                    //ITEM: 3. Atuarão sobre a bala a força da propulsão do canhão e do vento. O vento terá uma chance de variar a cada tiro;
+                    //(VARIAÇÃO DO VENTO)
                     GlobalForces.Wind = new Vector2(RandomNumberGenerator.Next(-1f, 1f), 0f) * RandomNumberGenerator.Next(0f, 10f);
 
                     Players[_currentPlayer].GetBehavior<ControllableBehavior>().IsActive = true;

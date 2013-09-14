@@ -42,6 +42,11 @@ namespace GearArena.Behaviors
             Vector2 angle = _input.RightDirectional;
             Weapon weapon = Entity.GetChildren<Weapon>();
 
+            //ITEM:     2. Na hora do tiro, permita que o jogador escolha:
+            //              2.1. Inclinação do canhão: Que dá o ângulo da bala;
+            //              2.2. Força: Enquanto pressionar tecla/mouse a força variará de 0 até o máximo do canhão. O jogador não sabe que máximo é esse;
+            //              2.3 Que bala usar (ver abaixo);
+
             if( (Entity as Player).Mirrored ) direction.Y *= -1;
 
             if (direction.X != 0f)

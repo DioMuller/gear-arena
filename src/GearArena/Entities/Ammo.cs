@@ -13,6 +13,11 @@ using MonoGameLib.Core;
 
 namespace GearArena.Entities
 {
+
+    //ITEM:     4. O jogador poderá escolher bala de massa 1, 2 ou 3. O dano será proporcional a bala:
+    //              4.1. Bala de massa 3 tira 20. O jogador terá 3 balas desse tipo.
+    //              4.2. Bala de massa 2 tira 10. O jogador terá 5 balas desse tipo.
+    //              4.3. Bala de massa 1 tira 5. Infinitas balas desse tipo.
     public enum AmmoType
     {
         Light = 2,
@@ -43,6 +48,7 @@ namespace GearArena.Entities
                 OnCollide = new OnCollideDelegate(OnCollision)
             });
 
+            //ITEM: 3. Atuarão sobre a bala a força da propulsão do canhão e do vento. O vento terá uma chance de variar a cada tiro;
             GetBehavior<PhysicsBehavior>().Forces.Push(initialForce);
             GetBehavior<PhysicsBehavior>().ConstantForces["Wind"] = GlobalForces.Wind;
 
@@ -147,6 +153,10 @@ namespace GearArena.Entities
 
                 if (p != null)
                 {
+                    //ITEM:     4. O jogador poderá escolher bala de massa 1, 2 ou 3. O dano será proporcional a bala:
+                    //              4.1. Bala de massa 3 tira 20. O jogador terá 3 balas desse tipo.
+                    //              4.2. Bala de massa 2 tira 10. O jogador terá 5 balas desse tipo.
+                    //              4.3. Bala de massa 1 tira 5. Infinitas balas desse tipo.
                     int damage = (Type == AmmoType.Light) ? 5 : ((Type == AmmoType.Medium) ? 10 : 20);
                     p.Hit(damage);
                 }

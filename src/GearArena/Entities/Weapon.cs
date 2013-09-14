@@ -36,6 +36,10 @@ namespace GearArena.Entities
 
             Force = 0f;
 
+            //ITEM:     4. O jogador poderá escolher bala de massa 1, 2 ou 3. O dano será proporcional a bala:
+            //              4.1. Bala de massa 3 tira 20. O jogador terá 3 balas desse tipo.
+            //              4.2. Bala de massa 2 tira 10. O jogador terá 5 balas desse tipo.
+            //              4.3. Bala de massa 1 tira 5. Infinitas balas desse tipo.
             Ammo = new Dictionary<AmmoType, int>();
             Ammo.Add(AmmoType.Light, -1);
             Ammo.Add(AmmoType.Medium, 5);
@@ -73,6 +77,7 @@ namespace GearArena.Entities
                     Ammo ammo = new Ammo((this.Parent as Player).Level, force, SelectedType) { Parent = this, Color = this.Color };
 
                     Vector2 positionCentered = (Parent.Position + ParentCenter); //Weapon origin position.
+                    //ITEM: b) Faz uso de vetores na forma de offsets, para a bala sair da ponta do canhão;
                     Vector2 weaponOffset = new Vector2(ammo.Size.X / 2, Size.Y + ammo.Size.Y).RotateRadians(Rotation); //Add ammo size as offset, relocates bullet Y.
 
                     ammo.Position = (positionCentered - weaponOffset);

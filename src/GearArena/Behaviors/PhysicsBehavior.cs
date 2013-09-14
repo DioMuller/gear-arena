@@ -62,11 +62,12 @@ namespace GearArena.Behaviors
 
         #region Methods
         /// <summary>
-        /// Updates the Rigid Body entity.
+        /// Updates the Physics of the entity.
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
+            //ITEM: c) Implementou corretamente o cálculo de deslocamento da bala, levando em conta a inércia e fazendo uso de vetores;
             Vector2 forces = Vector2.Zero;
             Vector2 instantForces = Vector2.Zero;
             float secs = (float)gameTime.ElapsedGameTime.TotalSeconds; 

@@ -168,7 +168,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
-    <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\data\maps\earth01.tmx">

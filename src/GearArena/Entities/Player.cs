@@ -49,6 +49,7 @@ namespace GearArena.Entities
 
             Color = color;
 
+            //ITEM: 5. Cada jogador terá 100 de vida.
             Health = 100;
 
             Fuel = 100;
@@ -64,21 +65,23 @@ namespace GearArena.Entities
 
             Behaviors.Add(new ControllableBehavior(this, new CustomKeyboardInput()));
             Behaviors.Add(new CollidableBehavior(this, level));
+            //ITEM: a) Implementação vetorial da função de gravidade
             Behaviors.Add(new PhysicsBehavior(this) { Mass = 10f, Rotate = false, Gravity = new Vector2(0f, 9.8f), Friction = new Vector2(0.01f, 0f) });
             
             Children.Add(new Weapon() { Parent = this, Position = new Vector2(0,0), FollowParent = true, Color = this.Color } );
 
             #region Particle
             List<ParticleState> particleStates = new List<ParticleState>();
-            particleStates.Add(new ParticleState() { StartTime = 0f, Color = Color.DarkBlue, Scale = .1f });
-            particleStates.Add(new ParticleState() { StartTime = 100f, Color = Color.Blue * 0.3f, Scale = .8f });
-            particleStates.Add(new ParticleState() { StartTime = 150f, Color = Color.Yellow * 0.3f, Scale = 1f });
+            particleStates.Add(new ParticleState() { StartTime = 0f, Color = Color.Red, Scale = .1f });
+            particleStates.Add(new ParticleState() { StartTime = 100f, Color = Color.Red * 0.8f, Scale = .8f });
+            particleStates.Add(new ParticleState() { StartTime = 150f, Color = Color.Red * 0.6f, Scale = 1f });
             particleStates.Add(new ParticleState() { StartTime = 200f, Color = Color.Red * 0.3f, Scale = 1.2f });
             particleStates.Add(new ParticleState() { StartTime = 300f, Color = Color.DarkGray * 0.2f, Scale = 1.5f });
             particleStates.Add(new ParticleState() { StartTime = 400f, Color = Color.Gray * 0.1f, Scale = 1.8f });
             particleStates.Add(new ParticleState() { StartTime = 500f, Color = Color.White * 0.05f, Scale = 2f });
 
-            _particles = new ParticleEmiter("images/particles/dust.png", particleStates) { ParticleMaxTime = 1000f, MillisecondsToEmit = 16f, OpeningAngle = 30f, ParticleSpeed = 0.1f };
+            
+            _particles = new ParticleEmiter("images/particles/dust.png", particleStates) { ParticleMaxTime = 1000f, MillisecondsToEmit = 16f, OpeningAngle = 90f, ParticleSpeed = 0.3f };
             #endregion Particle
         }
         #endregion Constructor
